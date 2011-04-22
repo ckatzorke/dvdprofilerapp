@@ -18,7 +18,7 @@ public class CollectionXmlStreamHandler {
 	public void setCollectionXmlResource(Resource collectionXmlResource) {
 		this.collectionXmlResource = collectionXmlResource;
 	}
-	
+
 	public int getDvdCount() {
 		return dvdCount;
 	}
@@ -27,17 +27,22 @@ public class CollectionXmlStreamHandler {
 		XMLInputFactory f = XMLInputFactory.newInstance();
 		XMLStreamReader staxReader = f
 				.createXMLStreamReader(collectionXmlResource.getInputStream());
-		String previousLocalName = null;
+		ParserEvent parserEvent = new ParserEvent();
 		while (staxReader.hasNext()) {
 			int eventType = staxReader.next();
-			//TODO anstaendiger check ob es das richtige DVD element ist
+			// TODO anstaendiger check ob es das richtige DVD element ist
 			if (eventType == XMLEvent.START_ELEMENT
-					&& "DVD".equals(staxReader.getLocalName())
-					&& ("Collection".equals(previousLocalName) || "DVD"
-							.equals(previousLocalName))) {
-				dvdCount++;
+					|| eventType == XMLEvent.END_ELEMENT) {
+				String localName = staxReader.getLocalName();
+				if (eventType == XMLEvent.START_ELEMENT
+						&& "DVD".equals(localName)
+						&& (("Collection".equals(parserEvent.getLocalName()) || "DVD"
+								.equals(parserEvent.getLocalName())))) {
+					dvdCount++;
+				}
+				parserEvent.setLocalName(localName);
+				parserEvent.setEventType(eventType);
 			}
-			previousLocalName = staxReader.getLocalName();
 		}
 		staxReader.close();
 	}
