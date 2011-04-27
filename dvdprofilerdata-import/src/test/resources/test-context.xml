@@ -2,8 +2,24 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
 	<bean id="collectionXmlStreamHandler" class="org.dvdprofilerapp.xml.CollectionXmlStreamHandler">
 		<property name="collectionXmlResource" value="classpath:test-collection.xml" />
 	</bean>
+
+	<bean id="restTemplate" class="org.springframework.web.client.RestTemplate">
+		<property name="messageConverters">
+			<list>
+				<bean
+					class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="dvdProfilerRepository" class="org.dvdprofilerapp.couch.DvdProfilerRepository">
+		<property name="dvdprofilerDbBaseUrl" value="http://localhost:5984/test-dvdprofiler" />
+		<property name="restTemplate" ref="restTemplate" />
+	</bean>
+
 
 </beans>

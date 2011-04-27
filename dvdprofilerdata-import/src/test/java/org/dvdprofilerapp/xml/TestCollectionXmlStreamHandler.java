@@ -15,7 +15,7 @@ public class TestCollectionXmlStreamHandler {
 	private CollectionXmlStreamHandler collectionXmlStreamHandler;
 
 	@Test
-	public void testIrgendwas() throws Exception {
+	public void testDvDCount() throws Exception {
 		collectionXmlStreamHandler.readCollection();
 		Assert.assertEquals(3, collectionXmlStreamHandler.getDvdCount());
 	}
