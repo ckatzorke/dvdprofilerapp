@@ -1,4 +1,4 @@
-package org.dvdprofilerapp.xml;
+package org.dvdprofilerapp.xml.stax;
 
 import javax.xml.stream.XMLStreamConstants;
 

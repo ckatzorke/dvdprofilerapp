@@ -16,7 +16,7 @@ import org.springframework.web.client.RestTemplate;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:test-context.xml" })
-public class TestDvdProfilerRepository {
+public class IntegrationTestDvdProfilerRepository {
 	@Autowired
 	private DvdProfilerRepository dvdProfilerRepository;
 

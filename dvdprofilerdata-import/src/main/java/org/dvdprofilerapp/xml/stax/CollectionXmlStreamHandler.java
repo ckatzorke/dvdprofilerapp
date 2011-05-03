@@ -1,4 +1,4 @@
-package org.dvdprofilerapp.xml;
+package org.dvdprofilerapp.xml.stax;
 
 import java.io.IOException;
 
@@ -7,9 +7,10 @@ import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 import javax.xml.stream.events.XMLEvent;
 
+import org.dvdprofilerapp.xml.CollectionParser;
 import org.springframework.core.io.Resource;
 
-public class CollectionXmlStreamHandler {
+public class CollectionXmlStreamHandler implements CollectionParser {
 
 	private Resource collectionXmlResource;
 
@@ -19,11 +20,19 @@ public class CollectionXmlStreamHandler {
 		this.collectionXmlResource = collectionXmlResource;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.dvdprofilerapp.xml.CollectionParser#getDvdCount()
+	 */
+	@Override
 	public int getDvdCount() {
 		return dvdCount;
 	}
 
-	public void readCollection() throws XMLStreamException, IOException {
+	/* (non-Javadoc)
+	 * @see org.dvdprofilerapp.xml.CollectionParser#parseCollection()
+	 */
+	@Override
+	public void parseCollection() throws Exception {
 		XMLInputFactory f = XMLInputFactory.newInstance();
 		XMLStreamReader staxReader = f
 				.createXMLStreamReader(collectionXmlResource.getInputStream());

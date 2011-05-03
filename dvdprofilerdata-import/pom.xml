@@ -6,7 +6,7 @@
 	<parent>
 		<artifactId>dvdprofilerapp</artifactId>
 		<groupId>org.dvdprofilerapp</groupId>
-		<version>0.0.1-SNAPSHOT</version>
+		<version>1.0-SNAPSHOT</version>
 	</parent>
 	<groupId>org.dvdprofilerapp</groupId>
 	<artifactId>dvdprofilerdata-import</artifactId>
@@ -51,6 +51,17 @@
 		<dependency>
 			<groupId>stax</groupId>
 			<artifactId>stax</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>javax.xml.bind</groupId>
+			<artifactId>jaxb-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.dvdprofilerapp</groupId>
+			<artifactId>dvdprofilerdata-jaxb-model</artifactId>
+			<version>1.0-SNAPSHOT</version>
+			<type>jar</type>
+			<scope>compile</scope>
 		</dependency>
 	</dependencies>
 </project>
