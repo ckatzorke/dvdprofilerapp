@@ -8,11 +8,8 @@
 		<groupId>org.dvdprofilerapp</groupId>
 		<version>1.0-SNAPSHOT</version>
 	</parent>
-	<groupId>org.dvdprofilerapp</groupId>
 	<artifactId>dvdprofilerdata-jaxb-model</artifactId>
-	<version>1.0-SNAPSHOT</version>
 	<name>dvdprofilerdata-jaxb-model</name>
-	<url>http://maven.apache.org</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
@@ -42,4 +39,5 @@
 			<artifactId>jaxb-api</artifactId>
 		</dependency>
 	</dependencies>
+	<description>The jaxb model, generated with jaxb compiler</description>
 </project>

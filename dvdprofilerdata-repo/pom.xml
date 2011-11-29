@@ -7,19 +7,18 @@
 		<groupId>org.dvdprofilerapp</groupId>
 		<version>1.0-SNAPSHOT</version>
 	</parent>
-	<artifactId>dvdprofilerdata-import</artifactId>
-	<name>dvdprofilerdata-import</name>
+	<artifactId>dvdprofilerdata-repo</artifactId>
+	<name>dvdprofilerdata-repo</name>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
+	<packaging>pom</packaging>
+	<description>Repo parent project for storing and accessing content</description>
 	<build>
 		<finalName>${project.artifactId}</finalName>
 	</build>
-	<packaging>pom</packaging>
 	<modules>
-		<module>dvdprofilerdata-import-api</module>
-		<module>dvdprofilerdata-import-batch-processing</module>
-		<module>dvdprofilerdata-import-stax</module>
-		<module>dvdprofilerdata-import-jaxp</module>
+		<module>dvdprofilerdata-repo-api</module>
+		<module>dvdprofilerdata-repo-couch</module>
 	</modules>
 </project>
