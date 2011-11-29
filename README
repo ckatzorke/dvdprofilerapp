@@ -1,4 +1,6 @@
-dvdprofiler app
+dvdprofiler app and tools
 
 
-Goal is to provide a couchapp for data from dvdprofiler (http://www.invelos.com/ - great product - BUY it).
+Goal is to provide a bunch of utilities to parse and handle collection.xml to add functionality and candy to dvdprofiler.
+Additionally, a couchapp will be provided to play with data from dvdprofiler (http://www.invelos.com/ - great product - BUY it).
+
