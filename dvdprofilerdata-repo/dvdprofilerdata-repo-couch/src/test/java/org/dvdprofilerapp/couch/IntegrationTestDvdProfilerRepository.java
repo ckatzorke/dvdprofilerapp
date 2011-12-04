@@ -38,7 +38,7 @@ public class IntegrationTestDvdProfilerRepository {
 		DVD d = new DVD();
 		d.setId("12345");
 		d.setTitle("Harry");
-		d.setDescription("So was halt");
+		d.setOverview("So was halt");
 		String id = dvdProfilerRepository.writeDvd(d);
 		DVD d2 = dvdProfilerRepository.readDvd(id);
 		Assert.assertNotNull(d2);

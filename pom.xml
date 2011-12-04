@@ -155,7 +155,8 @@
 
 	<modules>
 		<module>dvdprofilerdata-jaxb-model</module>
-		<module>dvdprofilerdata-import</module>
+		<module>dvdprofilerdata-processing</module>
 		<module>dvdprofilerdata-repo</module>
+		<module>dvdprofilerdata-import-batch-processing</module>
 	</modules>
 </project>
