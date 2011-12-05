@@ -57,6 +57,12 @@ public class CollectionXmlStreamProcessor extends AbstractCollectionProcessor {
 										.equals(context.getCurrentElement())) {
 									dvd.setId(getElementTextValue(staxReader));
 								}
+								//UPC
+								if (CollectionProcessor.COLLECTION_ELEMENT_UPC
+										.equals(context.getCurrentElement())) {
+									dvd.setUpc(getElementTextValue(staxReader));
+								}
+								//ParentUPC
 								if (CollectionProcessor.COLLECTION_ELEMENT_TITLE
 										.equals(context.getCurrentElement())) {
 									dvd.setTitle(getElementTextValue(staxReader));

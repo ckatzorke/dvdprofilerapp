@@ -2,11 +2,11 @@ package org.dvdprofilerapp.model;
 
 import java.util.Arrays;
 
-//@JsonIgnoreProperties(ignoreUnknown=true)
 public class DVD {
 
 	private String id;
-
+	private String upc;
+	private String parentUpc;
 	private String title;
 	private String overview;
 	private MediaType[] mediaType;
@@ -18,8 +18,24 @@ public class DVD {
 		return id;
 	}
 
-	public void setId(String upn) {
-		this.id = upn;
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getUpc() {
+		return upc;
+	}
+
+	public void setUpc(String upc) {
+		this.upc = upc;
+	}
+
+	public String getParentUpc() {
+		return parentUpc;
+	}
+
+	public void setParentUpc(String parentUpc) {
+		this.parentUpc = parentUpc;
 	}
 
 	public String getTitle() {
@@ -72,12 +88,12 @@ public class DVD {
 
 	@Override
 	public String toString() {
-		return "DVD [id=" + id + ", title=" + title + ", overview=" + overview
+		return "DVD [id=" + id + ", upc=" + upc + ", parentUpc=" + parentUpc
+				+ ", title=" + title + ", overview=" + overview
 				+ ", mediaType=" + Arrays.toString(mediaType)
 				+ ", collectionNumber=" + collectionNumber
 				+ ", countryOfOrigin=" + countryOfOrigin + ", genres="
 				+ Arrays.toString(genres) + "]";
 	}
-
 
 }

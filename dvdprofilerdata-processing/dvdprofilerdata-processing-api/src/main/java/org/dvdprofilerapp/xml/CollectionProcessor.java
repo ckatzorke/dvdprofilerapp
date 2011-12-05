@@ -1,9 +1,10 @@
 package org.dvdprofilerapp.xml;
 
 public interface CollectionProcessor {
-	/** Handled elemets */
+	/** Handled elements */
 	public static final String COLLECTION_ELEMENT_TITLE = "Title";
 	public static final String COLLECTION_ELEMENT_ID = "ID";
+	public static final String COLLECTION_ELEMENT_UPC = "UPC";
 	public static final String COLLECTION_ELEMENT_COLLECTION = "Collection";
 	public static final String COLLECTION_ELEMENT_DVD = "DVD";
 	public static final String COLLECTION_ELEMENT_OVERVIEW = "Overview";

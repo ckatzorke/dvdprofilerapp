@@ -4,3 +4,9 @@ dvdprofiler app and tools
 Goal is to provide a bunch of utilities to parse and handle collection.xml to add functionality and candy to dvdprofiler.
 Additionally, a couchapp will be provided to play with data from dvdprofiler (http://www.invelos.com/ - great product - BUY it).
 
+
+Getting started
+- checkout
+- configure dvdprofilerapp/dvdprofilerdata-import-batch-processing/src/main/resources/applicationContext.xml
+	- for your couchdb
+- run org.dvdprofilerapp.dvdprofilerimport.Import in dvdprofilerapp/dvdprofilerdata-import-batch-processing

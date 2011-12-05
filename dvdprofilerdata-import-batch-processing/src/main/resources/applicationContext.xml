@@ -20,10 +20,16 @@
 		<property name="messageConverters">
 			<list>
 				<bean
-					class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter" />
+					class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+					<property name="objectMapper" ref="objectMapper"></property>
+				</bean>
 			</list>
 		</property>
 	</bean>
+	<bean id="importInitializer" class="org.dvdprofilerapp.dvdprofilerimport.Import">
+		<property name="objectMapper" ref="objectMapper" />
+	</bean>
+	<bean id="objectMapper" class="org.codehaus.jackson.map.ObjectMapper"></bean>
 
 	<bean id="dvdProfilerRepository" class="org.dvdprofilerapp.couch.DvdProfilerRepositoryCouchImpl"
 		init-method="init">
