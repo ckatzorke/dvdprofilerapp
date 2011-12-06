@@ -20,5 +20,6 @@
 		<module>dvdprofilerdata-repo-api</module>
 		<module>dvdprofilerdata-repo-couch</module>
     <module>dvdprofilerdata-repo-mixin</module>
+    <module>dvdprofilerdata-repo-ektorp</module>
   </modules>
 </project>
