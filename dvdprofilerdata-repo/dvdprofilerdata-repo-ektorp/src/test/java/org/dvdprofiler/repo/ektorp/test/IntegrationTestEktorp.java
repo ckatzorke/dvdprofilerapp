@@ -28,9 +28,10 @@ public class IntegrationTestEktorp {
 
 	@Test
 	public void testWrite() throws Exception {
-		DVD dvd = new CouchDVD();
+		DVD dvd = new DVD();
 		dvd.setId("011891980449");
 		dvd.setTitle("test");
+		dvd.setProfileTimeStamp("2011-02-02");
 		dvdRepo.writeDvd(dvd);
 		DVD readDvd = dvdRepo.readDvd("011891980449");
 		Assert.assertEquals("test", readDvd.getTitle());

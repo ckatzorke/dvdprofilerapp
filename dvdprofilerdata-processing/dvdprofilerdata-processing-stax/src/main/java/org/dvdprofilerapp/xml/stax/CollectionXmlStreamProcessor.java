@@ -3,6 +3,7 @@ package org.dvdprofilerapp.xml.stax;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamException;
@@ -16,7 +17,8 @@ import org.dvdprofilerapp.xml.CollectionProcessor;
 import org.springframework.core.io.Resource;
 
 public class CollectionXmlStreamProcessor extends AbstractCollectionProcessor {
-
+	private Logger logger = Logger.getLogger(CollectionXmlStreamProcessor.class
+			.getName());
 	private Resource collectionXmlResource;
 
 	public void setCollectionXmlResource(Resource collectionXmlResource) {
@@ -57,12 +59,16 @@ public class CollectionXmlStreamProcessor extends AbstractCollectionProcessor {
 										.equals(context.getCurrentElement())) {
 									dvd.setId(getElementTextValue(staxReader));
 								}
-								//UPC
+								if (CollectionProcessor.COLLECTION_ELEMENT_PROFILE_TIMESTAMP
+										.equals(context.getCurrentElement())) {
+									dvd.setProfileTimeStamp(getElementTextValue(staxReader));
+								}
+								// UPC
 								if (CollectionProcessor.COLLECTION_ELEMENT_UPC
 										.equals(context.getCurrentElement())) {
 									dvd.setUpc(getElementTextValue(staxReader));
 								}
-								//ParentUPC
+								// ParentUPC
 								if (CollectionProcessor.COLLECTION_ELEMENT_TITLE
 										.equals(context.getCurrentElement())) {
 									dvd.setTitle(getElementTextValue(staxReader));
@@ -73,10 +79,8 @@ public class CollectionXmlStreamProcessor extends AbstractCollectionProcessor {
 										dvd.setCollectionNumber(Integer
 												.parseInt(getElementTextValue(staxReader)));
 									} catch (NumberFormatException e) {
-										System.err
-												.println("Error parsing as int@"
-														+ staxReader
-																.getLocation());
+										logger.warning("Error parsing as int@"
+												+ staxReader.getLocation());
 									}
 								}
 								if (CollectionProcessor.COLLECTION_ELEMENT_COUNTRYOFORIGIN

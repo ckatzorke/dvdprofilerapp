@@ -6,6 +6,7 @@ public class DVD {
 
 	private String id;
 	private String upc;
+	private String profileTimeStamp;
 	private String parentUpc;
 	private String title;
 	private String overview;
@@ -86,14 +87,22 @@ public class DVD {
 		this.genres = genres;
 	}
 
+	public void setProfileTimeStamp(String profileTimeStamp) {
+		this.profileTimeStamp = profileTimeStamp;
+	}
+
+	public String getProfileTimeStamp() {
+		return profileTimeStamp;
+	}
+
 	@Override
 	public String toString() {
-		return "DVD [id=" + id + ", upc=" + upc + ", parentUpc=" + parentUpc
-				+ ", title=" + title + ", overview=" + overview
-				+ ", mediaType=" + Arrays.toString(mediaType)
-				+ ", collectionNumber=" + collectionNumber
-				+ ", countryOfOrigin=" + countryOfOrigin + ", genres="
-				+ Arrays.toString(genres) + "]";
+		return "DVD [id=" + id + ", upc=" + upc + ", profileTimeStamp="
+				+ profileTimeStamp + ", parentUpc=" + parentUpc + ", title="
+				+ title + ", overview=" + overview + ", mediaType="
+				+ Arrays.toString(mediaType) + ", collectionNumber="
+				+ collectionNumber + ", countryOfOrigin=" + countryOfOrigin
+				+ ", genres=" + Arrays.toString(genres) + "]";
 	}
 
 }

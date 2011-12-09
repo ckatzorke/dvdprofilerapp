@@ -2,11 +2,14 @@ package org.dvdprofiler.repo.ektorp;
 
 import java.io.File;
 import java.io.InputStream;
+import java.text.DateFormat;
+import java.util.Date;
 import java.util.logging.Logger;
 
 import org.dvdprofilerapp.DvdProfilerRepository;
 import org.dvdprofilerapp.model.DVD;
 import org.ektorp.AttachmentInputStream;
+import org.ektorp.DocumentNotFoundException;
 import org.springframework.beans.BeanUtils;
 import org.springframework.core.io.FileSystemResource;
 
@@ -15,7 +18,7 @@ public class DvdProfilerRepositoryEktorpImpl implements DvdProfilerRepository {
 	private Logger logger = Logger
 			.getLogger(DvdProfilerRepositoryEktorpImpl.class.getName());
 
-	private static final String IMAGES_THUMNBNAILS_DIR = "/Images/Thumnbnails/";
+	private static final String IMAGES_THUMNBNAILS_DIR = "/Images/Thumbnails/";
 	private DVDRepo repo;
 	private String dvdprofilerDBDirectory;
 	private Boolean attach;
@@ -34,12 +37,41 @@ public class DvdProfilerRepositoryEktorpImpl implements DvdProfilerRepository {
 
 	@Override
 	public String writeDvd(DVD dvd) {
-		CouchDVD couchDVD = new CouchDVD();
-		BeanUtils.copyProperties(dvd, couchDVD);
-		repo.add(couchDVD);
-		if (attachEnabled()) {
-			attachThumbnail(couchDVD, ThumbnailType.f);
-			attachThumbnail(couchDVD, ThumbnailType.b);
+		CouchDVD couchDVD = null;
+		boolean isnew = true;
+		try {
+			couchDVD = repo.get(dvd.getId());
+			isnew = false;
+		} catch (DocumentNotFoundException e) {
+			couchDVD = new CouchDVD();
+		}
+		boolean update = true;
+		if (couchDVD.getProfileTimeStamp() != null) {
+			// compare profilertimestamps
+			ProfilerTimeStampCompare compare = new ProfilerTimeStampCompare(
+					couchDVD.getProfileTimeStamp(), dvd.getProfileTimeStamp());
+			if (compare.isUpdated()) {
+				logger.info("DVD " + dvd.getTitle() + " (" + dvd.getId()
+						+ ") updated.");
+				update = true;
+			} else {
+				logger.info("DVD " + dvd.getTitle() + " (" + dvd.getId()
+						+ ") not updated. Skipping...");
+				update = false;
+			}
+		} else {
+			logger.fine("Creating dvd entity " + dvd.getTitle() + " (" + dvd.getId() + ")");
+		}
+		if (update) {
+			BeanUtils.copyProperties(dvd, couchDVD);
+			if (isnew)
+				repo.add(couchDVD);
+			else
+				repo.update(couchDVD);
+			if (attachEnabled()) {
+				attachThumbnail(couchDVD, ThumbnailType.f);
+				attachThumbnail(couchDVD, ThumbnailType.b);
+			}
 		}
 		return null;
 	}
@@ -60,6 +92,7 @@ public class DvdProfilerRepositoryEktorpImpl implements DvdProfilerRepository {
 						logger.info(dvdprofilerDBDirectory
 								+ IMAGES_THUMNBNAILS_DIR
 								+ " is correct. Trying to attach images and thumbnails.");
+						attach = Boolean.TRUE;
 					} else {
 						logger.warning(dvdprofilerDBDirectory
 								+ IMAGES_THUMNBNAILS_DIR
