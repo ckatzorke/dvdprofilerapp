@@ -1,24 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:couchdb="http://www.ektorp.org/schema/couchdb"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:couchdb="http://www.ektorp.org/schema/couchdb"
 	xmlns:util="http://www.springframework.org/schema/util"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.1.xsd
 		http://www.ektorp.org/schema/couchdb http://www.ektorp.org/schema/couchdb/couchdb.xsd">
 
 	<util:properties id="couchdbProperties" location="classpath:/couchdb.properties" />
-	
+
 	<couchdb:instance id="localCouch" url="http://localhost:5984"
 		properties="couchdbProperties" />
 
-	<couchdb:database id="dvdDB" name="test-dvdprofiler" instance-ref="localCouch" />
-	
+	<couchdb:database id="dvdDB" name="test-dvdprofiler"
+		instance-ref="localCouch" />
+
 	<bean id="ektorpRepo" class="org.dvdprofiler.repo.ektorp.DVDRepo">
 		<constructor-arg ref="dvdDB" />
 	</bean>
-	<bean id="dvdRepo" class="org.dvdprofiler.repo.ektorp.DvdProfilerRepositoryEktorpImpl">
+	<bean id="dvdRepo"
+		class="org.dvdprofiler.repo.ektorp.DvdProfilerRepositoryEktorpImpl">
 		<property name="repo" ref="ektorpRepo" />
+		<property name="dvdprofilerDBDirectory"
+			value="C:/Users/Chris/Documents/DVD Profiler/Databases/Default" />
 	</bean>
 
 

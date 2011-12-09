@@ -9,4 +9,7 @@ public class DVDRepo extends CouchDbRepositorySupport<CouchDVD> {
 		super(CouchDVD.class, db);
 	}
 
+	public CouchDbConnector getDB() {
+		return db;
+	}
 }

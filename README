@@ -9,4 +9,4 @@ Getting started
 - checkout
 - configure dvdprofilerapp/dvdprofilerdata-import-batch-processing/src/main/resources/applicationContext.xml
 	- for your couchdb
-- run org.dvdprofilerapp.dvdprofilerimport.Import in dvdprofilerapp/dvdprofilerdata-import-batch-processing
+- run org.dvdprofilerapp.dvdprofilerimport.Import in dvdprofilerapp/dvdprofilerdata-import-batch-processing (in IDE - or assemvle all required libs first)

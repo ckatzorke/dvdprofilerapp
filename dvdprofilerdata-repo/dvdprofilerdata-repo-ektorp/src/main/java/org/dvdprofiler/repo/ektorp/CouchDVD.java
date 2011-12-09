@@ -1,20 +1,22 @@
 package org.dvdprofiler.repo.ektorp;
 
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.dvdprofilerapp.model.DVD;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class CouchDVD extends DVD {
 	@JsonProperty(value = "_rev")
 	private String revision;
-	@JsonProperty(value = "_id")
-	private String id;
 
 	@Override
+	@JsonProperty(value = "_id")
 	public String getId() {
 		return super.getId();
 	}
 
 	@Override
+	@JsonProperty(value = "_id")
 	public void setId(String id) {
 		super.setId(id);
 	}

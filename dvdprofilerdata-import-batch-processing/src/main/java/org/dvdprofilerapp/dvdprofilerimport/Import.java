@@ -19,7 +19,7 @@ public class Import implements InitializingBean {
 
 	public void doImport() {
 		ApplicationContext appCtx = new ClassPathXmlApplicationContext(
-				"classpath:applicationContext.xml");
+				"classpath:applicationContext-ektorp.xml");
 		CollectionProcessor collectionProcessor = appCtx
 				.getBean(CollectionProcessor.class);
 		DVDEventListener persister = appCtx.getBean(DVDEventListener.class);
