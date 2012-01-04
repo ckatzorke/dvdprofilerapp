@@ -1,4 +1,7 @@
 // Apache 2.0 J Chris Anderson 2011
+var path;
+var design;
+var db;
 $(function() {   
     // friendly helper http://tinyurl.com/6aow6yn
     $.fn.serializeObject = function() {
@@ -17,29 +20,10 @@ $(function() {
         return o;
     };
 
-    var path = unescape(document.location.pathname).split('/'),
+    path = unescape(document.location.pathname).split('/'),
         design = path[3],
         db = $.couch.db(path[1]);
-    function createOverview() {
-        db.view(design + "/media", {
-            group : "true",
-            success : function(data) {
-            	console.log(data);
-                var overview = $.mustache($("#mustache-overview").html(), data);
-                $("#overview").html(overview);
-                $('#carousel-overview').jcarousel({
-                    auto: 2,
-                    wrap: 'last',
-                    visible: 1,
-                    scroll: 1,
-                    animation: "slow",
-                    buttonNextHTML: null,
-                    buttonPrevHTML: null
-                });
-            }
-        });
-    };
-    createOverview();
+    
     
     //?
     var changesRunning = false;

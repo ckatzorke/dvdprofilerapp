@@ -3,34 +3,16 @@
   <head>
     <title>DVDProfiler CouchApp</title>
     <link rel="stylesheet" href="style/main.css" type="text/css">
-	<link rel="stylesheet" type="text/css" href="style/jcarouselskin/tango/skin.css" />
   </head>
   <body>
     <div id="account"></div>
 
     <h1>DVDProfiler CouchApp</h1>
-    <div>sample <a href="http://sorgalla.com/projects/jcarousel/">jcarousel</a> overview</div>
-    <div id="overview"></div>
+   <ul>
+   	<li><a href="overview-jcarousel.html">Overview with jcarousel</a>
+   	<li><a href="overview-caroufredsel.html">Overview with carouFredSel</a>
+   </ul>
 
   </body>
-  <script type="text/javascript" src="/_utils/script/sha1.js"></script>
-  <script type="text/javascript" src="/_utils/script/json2.js"></script>
-  <script type="text/javascript" src="/_utils/script/jquery.js"></script>
-  <script type="text/javascript" src="/_utils/script/jquery.couch.js"></script>
-  <script type="text/javascript" src="vendor/couchapp/jquery.couchLogin.js"></script>
-  <script type="text/javascript" src="vendor/couchapp/jquery.couchProfile.js"></script>
-  <script type="text/javascript" src="vendor/couchapp/md5.js"></script>
-  <script type="text/javascript" src="vendor/couchapp/jquery.mustache.js"></script>
-  <script type="text/javascript" src="vendor/couchapp/jquery.jcarousel.min.js"></script>
-
-  <script id="mustache-overview" type="text/x-mustache" charset="utf-8">
-	<ul id="carousel-overview" class="jcarousel-skin-tango">
-		{{#rows}}
-			<li><div style="float:left">{{value}}</div>&nbsp;<img src="images/logo/{{key}}.jpg" height="24px"></li>
-		{{/rows}}
-	</ul>
-  </script>
-
-  <script src="script/app.js"></script>
 
 </html>
