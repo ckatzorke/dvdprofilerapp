@@ -2,8 +2,6 @@ package org.dvdprofiler.repo.ektorp;
 
 import java.io.File;
 import java.io.InputStream;
-import java.text.DateFormat;
-import java.util.Date;
 import java.util.logging.Logger;
 
 import org.dvdprofilerapp.DvdProfilerRepository;
@@ -19,11 +17,17 @@ public class DvdProfilerRepositoryEktorpImpl implements DvdProfilerRepository {
 			.getLogger(DvdProfilerRepositoryEktorpImpl.class.getName());
 
 	private static final String IMAGES_THUMNBNAILS_DIR = "/Images/Thumbnails/";
+	private static final String IMAGES_DIR = "/Images/";
+
 	private DVDRepo repo;
 	private String dvdprofilerDBDirectory;
 	private Boolean attach;
 
 	private enum ThumbnailType {
+		f, b
+	}
+
+	private enum CoverType {
 		f, b
 	}
 
@@ -60,7 +64,8 @@ public class DvdProfilerRepositoryEktorpImpl implements DvdProfilerRepository {
 				update = false;
 			}
 		} else {
-			logger.fine("Creating dvd entity " + dvd.getTitle() + " (" + dvd.getId() + ")");
+			logger.fine("Creating dvd entity " + dvd.getTitle() + " ("
+					+ dvd.getId() + ")");
 		}
 		if (update) {
 			BeanUtils.copyProperties(dvd, couchDVD);
@@ -71,6 +76,8 @@ public class DvdProfilerRepositoryEktorpImpl implements DvdProfilerRepository {
 			if (attachEnabled()) {
 				attachThumbnail(couchDVD, ThumbnailType.f);
 				attachThumbnail(couchDVD, ThumbnailType.b);
+				attachCover(couchDVD, CoverType.f);
+				attachCover(couchDVD, CoverType.b);
 			}
 		}
 		return null;
@@ -122,6 +129,23 @@ public class DvdProfilerRepositoryEktorpImpl implements DvdProfilerRepository {
 					couchDVD.getRevision(), a);
 		} catch (Exception e) {
 			logger.severe("Cannot attach thumbnail_" + type + " [" + filename
+					+ "]: " + e.getMessage());
+		}
+	}
+
+	private void attachCover(CouchDVD couchDVD, CoverType type) {
+		String filename = dvdprofilerDBDirectory + IMAGES_DIR
+				+ couchDVD.getId() + type + ".jpg";
+		try {
+			FileSystemResource thumbnail = new FileSystemResource(filename);
+			InputStream inputStream = thumbnail.getInputStream();
+			AttachmentInputStream a = new AttachmentInputStream(
+					"cover_" + type, inputStream, "image/jpeg");
+			couchDVD = repo.get(couchDVD.getId());
+			repo.getDB().createAttachment(couchDVD.getId(),
+					couchDVD.getRevision(), a);
+		} catch (Exception e) {
+			logger.severe("Cannot attach cover_" + type + " [" + filename
 					+ "]: " + e.getMessage());
 		}
 	}

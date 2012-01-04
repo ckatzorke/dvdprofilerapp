@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>DVDProfiler CouchApp</title>
+    <link rel="stylesheet" href="style/main.css" type="text/css">
+	<link rel="stylesheet" type="text/css" href="style/jcarouselskin/tango/skin.css" />
+	<style>
+	.image_carousel {
+		padding: 15px 0 15px 40px;
+	}
+	.image_carousel img {
+		border: 1px solid #ccc;
+		background-color: white;
+		padding: 9px;
+		margin: 7px;
+		display: block;
+		float: left;
+	}
+	.clearfix {
+		float: none;
+		clear: both;
+	}
+	</style>
+  </head>
+  <body>
+    <div id="account"></div>
+
+    <h1>DVDProfiler CouchApp</h1>
+    <div>sample <a href="http://caroufredsel.frebsite.nl/">carouFredSel</a> thumbnail gallery, ordered by purchase date descending</div>
+    <div id="thumbnailgallery" class="image_carousel"></div>
+
+  </body>
+  <script type="text/javascript" src="/_utils/script/sha1.js"></script>
+  <script type="text/javascript" src="/_utils/script/json2.js"></script>
+  <script type="text/javascript" src="/_utils/script/jquery.js"></script>
+  <script type="text/javascript" src="/_utils/script/jquery.couch.js"></script>
+  <script type="text/javascript" src="vendor/couchapp/jquery.couchLogin.js"></script>
+  <script type="text/javascript" src="vendor/couchapp/jquery.couchProfile.js"></script>
+  <script type="text/javascript" src="vendor/couchapp/md5.js"></script>
+  <script type="text/javascript" src="vendor/couchapp/jquery.mustache.js"></script>
+  <script type="text/javascript" src="script/caroufredsel/jquery.carouFredSel-5.4.1-packed.js"></script>
+
+  <script id="mustache-thumbnailgallery" type="text/x-mustache" charset="utf-8">
+	<div id="carousel-thumbnailgallery">
+		{{#rows}}
+			<img src="/dvdprofiler/{{id}}/thumbnail_f" height="220">
+		{{/rows}}
+	</div>
+	<div class="clearfix"></div>
+  </script>
+
+  <script src="script/app.js"></script>
+  <script src="script/thumbnailgallery.caroufredsel.js"></script>
+
+</html>
