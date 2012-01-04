@@ -14,6 +14,7 @@ public class DVD {
 	private int collectionNumber;
 	private String countryOfOrigin;
 	private String[] genres;
+	private String purchaseDate;
 
 	public String getId() {
 		return id;
@@ -95,6 +96,14 @@ public class DVD {
 		return profileTimeStamp;
 	}
 
+	public void setPurchaseDate(String purchaseDate) {
+		this.purchaseDate = purchaseDate;
+	}
+
+	public String getPurchaseDate() {
+		return purchaseDate;
+	}
+
 	@Override
 	public String toString() {
 		return "DVD [id=" + id + ", upc=" + upc + ", profileTimeStamp="
@@ -102,7 +111,8 @@ public class DVD {
 				+ title + ", overview=" + overview + ", mediaType="
 				+ Arrays.toString(mediaType) + ", collectionNumber="
 				+ collectionNumber + ", countryOfOrigin=" + countryOfOrigin
-				+ ", genres=" + Arrays.toString(genres) + "]";
+				+ ", genres=" + Arrays.toString(genres) + ", purchaseDate="
+				+ purchaseDate + "]";
 	}
 
 }

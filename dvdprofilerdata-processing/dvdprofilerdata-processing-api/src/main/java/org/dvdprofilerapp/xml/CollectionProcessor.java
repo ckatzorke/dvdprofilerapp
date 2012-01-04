@@ -15,6 +15,7 @@ public interface CollectionProcessor {
 	public static final String COLLECTION_ELEMENT_GENRES = "Genres";
 	public static final String COLLECTION_ELEMENT_BOXSET = "BoxSer";
 	public static final String COLLECTION_ELEMENT_PARENT = "Parent";
+	public static final String COLLECTION_ELEMENT_PURCHASE_DATE = "PurchaseDate";
 
 	/** helper */
 	public static final String COLLECTION_ELEMENT_MEDIA_TYPE = "MediaType";

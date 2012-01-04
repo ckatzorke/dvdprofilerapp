@@ -69,12 +69,20 @@ public class CollectionXmlStreamProcessor extends AbstractCollectionProcessor {
 										.equals(context.getCurrentElement())) {
 									dvd.setUpc(getElementTextValue(staxReader));
 								}
-								// TODO ParentUPC
+								// ParentUPC
 								if (CollectionProcessor.COLLECTION_ELEMENT_PARENT
 										.equals(context.getCurrentElement())) {
 									String parentUpc = getElementTextValue(staxReader);
 									if (StringUtils.hasText(parentUpc)) {
 										dvd.setParentUpc(parentUpc);
+									}
+								}
+								// PurchaseDate
+								if (CollectionProcessor.COLLECTION_ELEMENT_PURCHASE_DATE
+										.equals(context.getCurrentElement())) {
+									String purchaseDate = getElementTextValue(staxReader);
+									if (StringUtils.hasText(purchaseDate)) {
+										dvd.setPurchaseDate(purchaseDate);
 									}
 								}
 								if (CollectionProcessor.COLLECTION_ELEMENT_TITLE
