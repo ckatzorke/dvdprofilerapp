@@ -8,7 +8,7 @@ import org.dvdprofilerapp.model.DVD;
 public class CouchDVD extends DVD {
 	@JsonProperty(value = "_rev")
 	private String revision;
-
+	
 	@Override
 	@JsonProperty(value = "_id")
 	public String getId() {
@@ -27,5 +27,9 @@ public class CouchDVD extends DVD {
 
 	public String getRevision() {
 		return revision;
+	}
+	//synthetic getter to flag the document as dvdprofilerentry in couchdb
+	public String getType(){
+		return "dvdprofilerentry";
 	}
 }

@@ -30,7 +30,7 @@ public class Import implements InitializingBean {
 			System.out.println("* Starting import of collection.xml....");
 			collectionProcessor.process();
 			long then = System.currentTimeMillis();
-			System.out.println("* Done. [" + (then - now) + "ms].");
+			System.out.println("* Done. [" + ((then - now)/1000) + "s].");
 			System.out.println("**************************************");
 		} catch (Exception e) {
 			e.printStackTrace();

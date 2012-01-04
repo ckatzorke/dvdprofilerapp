@@ -15,6 +15,7 @@ import org.dvdprofilerapp.model.MediaType;
 import org.dvdprofilerapp.xml.AbstractCollectionProcessor;
 import org.dvdprofilerapp.xml.CollectionProcessor;
 import org.springframework.core.io.Resource;
+import org.springframework.util.StringUtils;
 
 public class CollectionXmlStreamProcessor extends AbstractCollectionProcessor {
 	private Logger logger = Logger.getLogger(CollectionXmlStreamProcessor.class
@@ -68,7 +69,14 @@ public class CollectionXmlStreamProcessor extends AbstractCollectionProcessor {
 										.equals(context.getCurrentElement())) {
 									dvd.setUpc(getElementTextValue(staxReader));
 								}
-								// ParentUPC
+								// TODO ParentUPC
+								if (CollectionProcessor.COLLECTION_ELEMENT_PARENT
+										.equals(context.getCurrentElement())) {
+									String parentUpc = getElementTextValue(staxReader);
+									if (StringUtils.hasText(parentUpc)) {
+										dvd.setParentUpc(parentUpc);
+									}
+								}
 								if (CollectionProcessor.COLLECTION_ELEMENT_TITLE
 										.equals(context.getCurrentElement())) {
 									dvd.setTitle(getElementTextValue(staxReader));

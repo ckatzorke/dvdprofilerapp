@@ -13,6 +13,8 @@ public interface CollectionProcessor {
 	public static final String COLLECTION_ELEMENT_COLLECTIONNUMBER = "CollectionNumber";
 	public static final String COLLECTION_ELEMENT_COUNTRYOFORIGIN = "CountryOfOrigin";
 	public static final String COLLECTION_ELEMENT_GENRES = "Genres";
+	public static final String COLLECTION_ELEMENT_BOXSET = "BoxSer";
+	public static final String COLLECTION_ELEMENT_PARENT = "Parent";
 
 	/** helper */
 	public static final String COLLECTION_ELEMENT_MEDIA_TYPE = "MediaType";
