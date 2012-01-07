@@ -76,8 +76,8 @@ public class DvdProfilerRepositoryEktorpImpl implements DvdProfilerRepository {
 			if (attachEnabled()) {
 				attachThumbnail(couchDVD, ThumbnailType.f);
 				attachThumbnail(couchDVD, ThumbnailType.b);
-				attachCover(couchDVD, CoverType.f);
-				attachCover(couchDVD, CoverType.b);
+//				attachCover(couchDVD, CoverType.f);
+//				attachCover(couchDVD, CoverType.b);
 			}
 		}
 		return null;

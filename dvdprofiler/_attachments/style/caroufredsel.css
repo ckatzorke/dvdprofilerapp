@@ -1,0 +1,36 @@
+.image_carousel {
+	padding: 15px 0 15px 40px;
+}
+
+.image_carousel img {
+	border: 1px solid #ccc;
+	background-color: white;
+	padding: 9px;
+	margin: 7px;
+	display: block;
+	float: left;
+}
+
+.html_carousel {
+	padding: 15px 0 15px 40px;
+}
+.thumbnailoverlay{
+	width: 90px;
+	height: 107px;
+	border: 1px solid #ccc;
+	background-color: white;
+	padding: 9px;
+	margin: 7px;
+	display: block;
+	float: left;
+	position: relative;
+	left: -108px;
+	font-size: 0.7em;
+	 text-align: center;
+	vertical-align: middle;
+	z-index: 1000;
+}
+.clearfix {
+	float: none;
+	clear: both;
+}
