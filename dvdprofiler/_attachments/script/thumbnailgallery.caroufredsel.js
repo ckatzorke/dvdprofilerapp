@@ -22,7 +22,7 @@ function createThumbnailGallery() {
 							loadImages( items );
 						},
 						scroll 		: {
-							delay 			: 1000,
+							delay 			: 3000,
 							pauseOnHover 	: true ,
 							onAfter			: function( oldItems, newItems){
 								loadImages(newItems);
