@@ -18,9 +18,15 @@ function createThumbnailGallery() {
 					{
 						items 		: thumbnailitems,
 						width 		: 610,
+						onCreate		: function( items ) {
+							loadImages( items );
+						},
 						scroll 		: {
-							delay : 1000,
-							pauseOnHover : true /*,
+							delay 			: 1000,
+							pauseOnHover 	: true ,
+							onAfter			: function( oldItems, newItems){
+								loadImages(newItems);
+							}/*,
 							onAfter : function(oldItems, newItems) {
 								thumbnailindex++;
 								if(thumbnailindex > (thumbnailinterval/thumbnailitems)){
@@ -48,6 +54,13 @@ function createThumbnailGallery() {
 		}
 	});
 };
+
+function loadImages(items){
+	items.each(function(){
+		console.log("loading " + $(this).attr('original'));
+		$(this).attr('src', $(this).attr('original'));
+	});
+}
 
 $(document).ready(function() {
 	createThumbnailGallery();

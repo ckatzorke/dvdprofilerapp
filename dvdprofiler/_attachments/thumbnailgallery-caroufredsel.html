@@ -39,7 +39,7 @@
 
   <script id="mustache-thumbnailgallery" type="text/x-mustache" charset="utf-8">
 	{{#rows}}
-		<img src="/dvdprofiler/{{id}}/thumbnail_f" height="107" width="90" title="{{value}}, purchased on {{key}}" alt="{{value}}, purchased on {{key}}" onerror="this.src='images/noimage.jpg';/*$(this).after($('<div>{{value}}</div>').addClass('thumbnailoverlay'))*/">
+		<img src="images/empty.png" original="/dvdprofiler/{{id}}/thumbnail_f" height="107" width="90" title="{{value}}, purchased on {{key}}" alt="{{value}}, purchased on {{key}}" onerror="this.src='images/noimage.jpg';/*$(this).after($('<div>{{value}}</div>').addClass('thumbnailoverlay'))*/">
 	{{/rows}}
   </script>
 
