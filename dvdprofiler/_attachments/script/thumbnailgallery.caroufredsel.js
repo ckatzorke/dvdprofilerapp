@@ -1,7 +1,7 @@
 //current scroll index
 var thumbnailindex = 1; // we start with 1 for easier calculating
 //number of thumbnails shown
-var thumbnailitems = 5;
+var thumbnailitems = 7;
 //number of entries loaded from view
 var thumbnailinterval = 2000;
 //number of view queries
@@ -17,14 +17,14 @@ function createThumbnailGallery() {
 			$('#carousel-thumbnailgallery').carouFredSel(
 					{
 						items 		: thumbnailitems,
-						width 		: 610,
+						width 		: 850,
 						onCreate		: function( items ) {
 							loadImages( items );
 						},
 						scroll 		: {
 							delay 			: 3000,
 							pauseOnHover 	: true ,
-							onAfter			: function( oldItems, newItems){
+							onBefore		: function( oldItems, newItems){
 								loadImages(newItems);
 							}/*,
 							onAfter : function(oldItems, newItems) {
@@ -64,4 +64,21 @@ function loadImages(items){
 
 $(document).ready(function() {
 	createThumbnailGallery();
+	//bind help message
+	 $('#helpthumbnailgallery').click(function() { 
+	        $.blockUI(
+	        		{ 
+	        			css: { 
+				            border: 'none', 
+				            padding: '15px', 
+				            backgroundColor: '#000', 
+				            '-webkit-border-radius': '10px', 
+				            '-moz-border-radius': '10px', 
+				            opacity: .9, 
+				            color: '#fff',
+				            'text-align': 'left'
+	        			},
+	        			message : $("#helpthumbnailgallerymessage")
+	        		}); 
+	    }); 
 });

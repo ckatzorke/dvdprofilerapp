@@ -30,7 +30,3 @@
 	vertical-align: middle;
 	z-index: 1000;
 }
-.clearfix {
-	float: none;
-	clear: both;
-}
