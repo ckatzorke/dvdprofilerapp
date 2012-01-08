@@ -55,3 +55,20 @@ $(function() {
         }
     });
  });
+
+function doHelpMessage(helpmessageNode){
+	$.blockUI(
+    		{ 
+    			css: { 
+		            border: 'none', 
+		            padding: '15px', 
+		            backgroundColor: '#000', 
+		            '-webkit-border-radius': '10px', 
+		            '-moz-border-radius': '10px', 
+		            opacity: .9, 
+		            color: '#fff',
+		            'text-align': 'left'
+    			},
+    			message : helpmessageNode
+    		}); 
+}

@@ -80,6 +80,13 @@ a:active {
 	list-style-image: url(../images/icons/delete.png);
 }
 
+#infinitecollectionlistcontainer{
+	width: 300px;
+}
+#infinitecollectionlist{
+	padding: 5px;
+}
+
 .clearfix {
 	float: none;
 	clear: both;

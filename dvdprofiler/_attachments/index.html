@@ -25,9 +25,9 @@
 	  			<p>Thumbnail gallery using <a href="http://caroufredsel.frebsite.nl/">carouFredSel</a> as a jQuery carousel plugin, adding a few additional functions. like lazy loading.<br>
 	  			It uses a CouchDB <a href="http://localhost:5984/dvdprofiler/_design/dvdprofiler/_view/thumbnailgallery?descending=true">view</a>, that emits all docs with the purchase date as key (descending).<br>
 			    <ul>
-				    <li class="advntage">Out-of-the-box plugin with nice UI and feature set</li>
+				    <li class="advantage">Out-of-the-box plugin with nice UI and feature set</li>
 				    <li class="advantage">Thumbnails are loaded lazily, inspired by jQuery lazy load (which won't work here), the images are loaded before they enter the viewable area, using the onBefore callback from caroufredsel, and the first set using onCreate respectively.</li>
-				   	<li class="disadvantage">All items are loaded, since dynamically inserting items behaves really strange, which results in pretty large html and memory usage.</li>
+				   	<li class="disadvantage">All items are loaded (since dynamically inserting items behaves really strange), which results in pretty large html and memory usage.</li>
 				   	<li class="disadvantage">not yet responsive :-(</li>
 			    </ul>
 			    <div style="text-align: center"><button onclick="$.unblockUI()">OK</button></div>
@@ -38,8 +38,16 @@
 				<div class="clearfix"></div>
 		    </div>
 	  	</div>
-	  	<div id="infinitedvdlistcontainer">
-	  		ILC
+	  	<div id="infinitecollectionlistcontainer">
+	  		<div class="containerheader">
+		  		DVDProfiler Infinite Collection List
+		  		<span style="float:right"><a id="helpinfinitecollectionlist"><img src="images/icons/help.png" height="16" width="16"></a></span>
+	  		</div>
+	  		<div id="helpinfinitecollectionlistmessage" style="display:none; cursor: default">
+	  			<p><strong>About DVDProfiler Infinite Collection List</strong></p>
+			    <div style="text-align: center"><button onclick="$.unblockUI()">OK</button></div>
+	  		</div>
+	  		<div id="infinitecollectionlist"><img src="images/loading.gif" height="16" width="16"></div>
 	  	</div>
 	  	<div id="detailscontainer">
 	  		DC
@@ -69,9 +77,15 @@
 			<img src="images/empty.png" original="/dvdprofiler/{{id}}/thumbnail_f" height="107" width="90" title="{{value}}, purchased on {{key}}" alt="{{value}}, purchased on {{key}}" onerror="this.src='images/noimage.jpg';/*$(this).after($('<div>{{value}}</div>').addClass('thumbnailoverlay'))*/">
 		{{/rows}}
 	</script>
+	<script id="mustache-infinitecollectionlist" type="text/x-mustache" charset="utf-8">
+		{{#rows}}
+			{{value}}<br>
+		{{/rows}}
+	</script>
 
 	<!-- application sripts -->
 	<script src="script/app.js"></script>
-	<script src="script/thumbnailgallery.caroufredsel.js"></script>
+	<script src="script/thumbnailgallery.js"></script>
+	<script src="script/infinitecollectionlist.js"></script>
 
 </html>
