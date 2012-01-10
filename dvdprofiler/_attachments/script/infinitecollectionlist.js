@@ -1,5 +1,5 @@
 function createInfiniteList(){
-	db.view(design + "/infinitelist?", {
+	db.view(design + "/infinitelist", {
 		descending 	: "true",
 		limit		: 100,
 		success : function(data) {
