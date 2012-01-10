@@ -87,7 +87,8 @@ public class CollectionXmlStreamProcessor extends AbstractCollectionProcessor {
 								}
 								if (CollectionProcessor.COLLECTION_ELEMENT_TITLE
 										.equals(context.getCurrentElement())) {
-									dvd.setTitle(getElementTextValue(staxReader));
+									String title = getElementTextValue(staxReader);
+									dvd.setTitle(title);
 								}
 								if (CollectionProcessor.COLLECTION_ELEMENT_COLLECTIONNUMBER
 										.equals(context.getCurrentElement())) {

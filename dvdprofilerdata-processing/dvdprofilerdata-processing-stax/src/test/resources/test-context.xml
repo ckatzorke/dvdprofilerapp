@@ -5,6 +5,8 @@
 
 	<bean id="collectionXmlStreamHandler" class="org.dvdprofilerapp.xml.stax.CollectionXmlStreamProcessor">
 		<property name="collectionXmlResource" value="classpath:test-collection.xml" />
+<!-- 		<property name="collectionXmlResource" value="file:C:/dev/git/dvdprofilerapp/dvdprofilerdata-import-batch-processing/src/main/resources/collection.xml" /> -->
+		
 	</bean>
 
 </beans>
