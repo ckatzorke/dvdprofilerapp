@@ -57,7 +57,7 @@ function createThumbnailGallery() {
 
 function loadImages(items){
 	items.each(function(){
-		console.log("loading " + $(this).attr('original'));
+//		console.log("loading " + $(this).attr('original'));
 		$(this).attr('src', $(this).attr('original'));
 	});
 }
