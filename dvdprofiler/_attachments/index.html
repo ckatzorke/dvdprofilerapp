@@ -47,7 +47,14 @@
 	  			<p><strong>About DVDProfiler Infinite Collection List</strong></p>
 			    <div style="text-align: center"><button onclick="$.unblockUI()">OK</button></div>
 	  		</div>
-	  		<div id="infinitecollectionlist"><img src="images/loading.gif" height="16" width="16"></span></div>
+	  		<div id="infinitecollectionlistsettings">
+	  		<input type="radio" name="infinitelistview" onchange="infinitelistloadingsettings.loadCounter=0;infinitelistloadingsettings.view=this.value;createInfiniteList();" value="infinitelistcollectionnumber" id="infinitecollectionlistsettings_view_number" checked="checked"/><label for="infinitecollectionlistsettings_view_number">by collection #</label>&nbsp;
+	  		<input type="radio" name="infinitelistview" onchange="infinitelistloadingsettings.loadCounter=0;infinitelistloadingsettings.view=this.value;createInfiniteList();" value="infinitelisttitle" id="infinitecollectionlistsettings_view_title"/><label for="infinitecollectionlistsettings_view_title">by title</label>
+	  			<br/>
+	  			<input type="radio" name="infinitelistdescending" onchange="infinitelistloadingsettings.loadCounter=0;infinitelistloadingsettings.descending=this.value;createInfiniteList();" value="false" id="infinitecollectionlistsettings_descending_false"/><label for="infinitecollectionlistsettings_descending_false">ascending</label>&nbsp;
+	  			<input type="radio" name="infinitelistdescending" onchange="infinitelistloadingsettings.loadCounter=0;infinitelistloadingsettings.descending=this.value;createInfiniteList();" value="true" checked="checked" id="infinitecollectionlistsettings_descending_true"/><label for="infinitecollectionlistsettings_descending_true">descending</label>
+	  		</div>
+	  		<div id="infinitecollectionlist"><img src="images/loading.gif" height="16" width="16"></div>
 	  	</div>
 	  	<div id="detailscontainer">
 	  		DC
@@ -79,7 +86,7 @@
 	</script>
 	<script id="mustache-infinitecollectionlist" type="text/x-mustache" charset="utf-8">
 		{{#rows}}
-			{{value}}<br>
+			{{#value}}<img src="/dvdprofiler/{{id}}/thumbnail_f" height="54" width="45" />{{collectionNumber}} - {{title}}{{/value}}<br>
 		{{/rows}}
 	</script>
 

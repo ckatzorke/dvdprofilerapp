@@ -5,8 +5,10 @@ var INFINITELISTLOADINGMUTEX = {
 	"locked" : false
 };
 var infinitelistloadingsettings = {
-	"items" : 100,
-	"loadCounter" : 0
+	"items" 		: 100,
+	"loadCounter" 	: 0,
+	"descending" 	: true,
+	"view"			: "infinitelistcollectionnumber"
 }
 /**
  * creates the infinite list container. Create first 100 entries and register
@@ -31,8 +33,8 @@ function loadInfiniteListItems() {
 	if (!INFINITELISTLOADINGMUTEX.locked) {
 		console.log("postloading items for infinite list");
 		INFINITELISTLOADINGMUTEX.locked = true;
-		db.view(design + "/infinitelist", {
-			descending : "true",
+		db.view(design + "/" + infinitelistloadingsettings.view, {
+			descending : infinitelistloadingsettings.descending,
 			limit : infinitelistloadingsettings.items,
 			skip : infinitelistloadingsettings.items
 					* infinitelistloadingsettings.loadCounter,
