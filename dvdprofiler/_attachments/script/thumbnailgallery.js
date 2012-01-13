@@ -1,22 +1,24 @@
-//current scroll index
-var thumbnailindex = 1; // we start with 1 for easier calculating
-//number of thumbnails shown
-var thumbnailitems = 9;
-//number of entries loaded from view
-var thumbnailinterval = 20;
-//number of view queries
-var thumbnailfetchcounter = 0;
+var thumbnailgallerysettings = {
+	/*current scroll index*/
+	thumbnailindex : 1, /* we start with 1 for easier calculating*/
+	/*number of thumbnails shown*/
+	thumbnailitems : 9,
+	/*number of entries loaded from view*/
+	thumbnailinterval : 20,
+	/*number of view queries*/
+	thumbnailfetchcounter : 0
+}
 function createThumbnailGallery() {
 	db.view(design + "/thumbnailgallery", {
 		descending : "true",
-		limit : thumbnailinterval,
+		limit : thumbnailgallerysettings.thumbnailinterval,
 		success : function(data) {
 			var thumbnailgallery = $.mustache($("#mustache-thumbnailgallery")
 					.html(), data);
 			$("#carousel-thumbnailgallery").html(thumbnailgallery);
 			$('#carousel-thumbnailgallery').carouFredSel(
 					{
-						items 		: thumbnailitems,
+						items 		: thumbnailgallerysettings.thumbnailitems,
 						width 		: 800,
 						onCreate		: function( items ) {
 							loadImages( items );
@@ -28,17 +30,17 @@ function createThumbnailGallery() {
 								loadImages(newItems);
 							}/*,
 							onAfter : function(oldItems, newItems) {
-								thumbnailindex++;
-								if(thumbnailindex > (thumbnailinterval/thumbnailitems)){
-									thumbnailindex = 1;
+								thumbnailgallerysettings.thumbnailindex++;
+								if(thumbnailgallerysettings.thumbnailindex > (thumbnailgallerysettings.thumbnailinterval/thumbnailgallerysettings.thumbnailitems)){
+									thumbnailgallerysettings.thumbnailindex = 1;
 								}
 								//if nothing left 2 scroll, then fetch next interval...
-								if((thumbnailinterval - (thumbnailindex * thumbnailitems)) == 0){
+								if((thumbnailgallerysettings.thumbnailinterval - (thumbnailgallerysettings.thumbnailindex * thumbnailgallerysettings.thumbnailitems)) == 0){
 									console.log("downloading new items...");
 									db.view(design + "/thumbnailgallery", {
 										descending 	: "true",
-										limit 		: thumbnailinterval,
-										skip		: ++thumbnailfetchcounter*thumbnailinterval,
+										limit 		: thumbnailgallerysettings.thumbnailinterval,
+										skip		: ++thumbnailgallerysettings.thumbnailfetchcounter*thumbnailgallerysettings.thumbnailinterval,
 										success : function(data) {
 											var thumbnailgallery = $.mustache($("#mustache-thumbnailgallery")
 													.html(), data);
