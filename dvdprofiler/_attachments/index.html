@@ -7,7 +7,7 @@
   </head>
   <body>
   	<div id="wrapper">
-		<div id="header"><div style="float: left">DVDProfiler CouchApp</div><div id="account"></div></div>
+		<div id="header">DVDProfiler CouchApp</div>
 	  	<div id="intro">
 	  		<br>All data is provided by <a href="http://www.invelos.com/">invelos DVDProfiler</a> a totally awesome client application to manage your dvd collection. <br>
 	  		Nevertheless, the online list provided by invelos is <a href="http://www.invelos.com/dvdcollection.aspx/Yubitsume">pretty low level</a>.
@@ -55,6 +55,7 @@
 	  			<input type="radio" name="infinitelistdescending" onchange="infinitelistloadingsettings.loadCounter=0;infinitelistloadingsettings.descending=this.value;createInfiniteList();" value="true" checked="checked" id="infinitecollectionlistsettings_descending_true"/><label for="infinitecollectionlistsettings_descending_true">descending</label>
 	  		</div>
 	  		<div id="infinitecollectionlist"><img src="images/loading.gif" height="16" width="16"></div>
+	  		<div id="infinitecollectionlistscrollinfo"><br/><br/><br/><br/>Scroll for more...<br/><br/><br/><br/></div>
 	  	</div>
 	  	<div id="detailscontainer">
 	  		DC
@@ -64,10 +65,10 @@
   </body>
   
 	<!--  built in libraries -->
-	<script type="text/javascript" src="/_utils/script/sha1.js"></script>
-	<script type="text/javascript" src="/_utils/script/json2.js"></script>
-	<script type="text/javascript" src="/_utils/script/jquery.js"></script>
-	<script type="text/javascript" src="/_utils/script/jquery.couch.js"></script>
+<!-- 	<script type="text/javascript" src="/_utils/script/sha1.js"></script> -->
+	<script type="text/javascript" src="vendor/couchapp/jquery-1.7.1.min.js"></script>
+	<script type="text/javascript" src="vendor/couchapp/json2.js"></script>
+	<script type="text/javascript" src="vendor/couchapp/jquery.couch.js"></script>
 	<script type="text/javascript" src="vendor/couchapp/jquery.couchLogin.js"></script>
 	<script type="text/javascript" src="vendor/couchapp/jquery.couchProfile.js"></script>
 	<script type="text/javascript" src="vendor/couchapp/md5.js"></script>
@@ -81,12 +82,12 @@
 	<!-- mustache -->
 	<script id="mustache-thumbnailgallery" type="text/x-mustache" charset="utf-8">
 		{{#rows}}
-			<img src="images/empty.png" original="/dvdprofiler/{{id}}/thumbnail_f" height="107" width="90" title="{{value}}, purchased on {{key}}" alt="{{value}}, purchased on {{key}}" onerror="this.src='images/noimage.jpg';/*$(this).after($('<div>{{value}}</div>').addClass('thumbnailoverlay'))*/">
+			<img src="images/empty.png" original="/dvdprofiler/{{id}}/thumbnail_f" height="81" width="67" title="{{value}}, purchased on {{key}}" alt="{{value}}, purchased on {{key}}" onerror="this.src='images/noimage.jpg';/*$(this).after($('<div>{{value}}</div>').addClass('thumbnailoverlay'))*/">
 		{{/rows}}
 	</script>
 	<script id="mustache-infinitecollectionlist" type="text/x-mustache" charset="utf-8">
 		{{#rows}}
-			{{#value}}<img src="/dvdprofiler/{{id}}/thumbnail_f" height="54" width="45" />{{collectionNumber}} - {{title}}{{/value}}<br>
+			{{#value}}<img src="/dvdprofiler/{{id}}/thumbnail_f" height="54" width="45" onerror="this.src='images/noimage.jpg';" />{{collectionNumber}} - {{title}}{{/value}}<br>
 		{{/rows}}
 	</script>
 

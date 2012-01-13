@@ -34,26 +34,6 @@ $(function() {
             changeHandler.onChange(drawItems);
         }
     }
-    $("#account").couchLogin({
-    	//TODO
-        loggedIn : function(r) {
-            $("#profile").couchProfile(r, {
-                profileReady : function(profile) {
-                    $("#create-message").submit(function(e){
-                        e.preventDefault();
-                        var form = this, doc = $(form).serializeObject();
-                        doc.created_at = new Date();
-                        doc.profile = profile;
-                        db.saveDoc(doc, {success : function() {form.reset();}});
-                        return false;
-                    }).find("input").focus();
-                }
-            });
-        },
-        loggedOut : function() {
-            $("#profile").html('<p>Please log in to see your profile.</p>');
-        }
-    });
  });
 
 function doHelpMessage(helpmessageNode){

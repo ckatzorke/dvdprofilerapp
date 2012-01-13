@@ -5,8 +5,8 @@
 .image_carousel img {
 	border: 1px solid #ccc;
 	background-color: white;
-	padding: 9px;
-	margin: 7px;
+	padding: 5px;
+	margin: 5px;
 	display: block;
 	float: left;
 }

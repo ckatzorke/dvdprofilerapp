@@ -5,10 +5,10 @@ var INFINITELISTLOADINGMUTEX = {
 	"locked" : false
 };
 var infinitelistloadingsettings = {
-	"items" 		: 100,
-	"loadCounter" 	: 0,
-	"descending" 	: true,
-	"view"			: "infinitelistcollectionnumber"
+	"items" : 50,
+	"loadCounter" : 0,
+	"descending" : true,
+	"view" : "infinitelistcollectionnumber"
 }
 /**
  * creates the infinite list container. Create first 100 entries and register
@@ -32,6 +32,18 @@ function createInfiniteList() {
 function loadInfiniteListItems() {
 	if (!INFINITELISTLOADINGMUTEX.locked) {
 		console.log("postloading items for infinite list");
+		$.blockUI({
+			message	:	"Loading new items...",
+			css 	: {
+				border : 'none',
+				padding : '15px',
+				backgroundColor : '#000',
+				'-webkit-border-radius' : '10px',
+				'-moz-border-radius' : '10px',
+				opacity : .5,
+				color : '#fff'
+			}
+		});
 		INFINITELISTLOADINGMUTEX.locked = true;
 		db.view(design + "/" + infinitelistloadingsettings.view, {
 			descending : infinitelistloadingsettings.descending,
@@ -48,6 +60,7 @@ function loadInfiniteListItems() {
 				}
 				infinitelistloadingsettings.loadCounter++;
 				INFINITELISTLOADINGMUTEX.locked = false;
+				$.unblockUI();
 			},
 		});
 	}
@@ -75,7 +88,7 @@ function checkPostLoadInfiniteList() {
 	// I am the scroll buffer; this is the amount of
 	// pre-bottom space we want to take into account
 	// before we start loading the next items.
-	var scrollBuffer = 150;
+	var scrollBuffer = 0;
 
 	// Check to see if the container bottom is close
 	// enought (with buffer) to the scroll of the

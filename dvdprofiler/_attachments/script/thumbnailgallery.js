@@ -1,9 +1,9 @@
 //current scroll index
 var thumbnailindex = 1; // we start with 1 for easier calculating
 //number of thumbnails shown
-var thumbnailitems = 7;
+var thumbnailitems = 9;
 //number of entries loaded from view
-var thumbnailinterval = 2000;
+var thumbnailinterval = 20;
 //number of view queries
 var thumbnailfetchcounter = 0;
 function createThumbnailGallery() {
@@ -17,7 +17,7 @@ function createThumbnailGallery() {
 			$('#carousel-thumbnailgallery').carouFredSel(
 					{
 						items 		: thumbnailitems,
-						width 		: 850,
+						width 		: 800,
 						onCreate		: function( items ) {
 							loadImages( items );
 						},

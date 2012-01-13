@@ -45,15 +45,6 @@ a:active {
 	background-color: #295183;
 }
 
-#account {
-	float: right;
-	font-size: 0.3em;
-	color: white;
-	position: relative;
-	margin-right: 96px;
-	margin-top: 46px;
-}
-
 #intro {
 	width: 100%;
 	color: #7A7E82;
@@ -80,14 +71,22 @@ a:active {
 	list-style-image: url(../images/icons/delete.png);
 }
 
+
+.clearfix {
+	float: none;
+	clear: both;
+}
+
+/**infinite list*/
 #infinitecollectionlistcontainer{
 	width: 300px;
 }
 #infinitecollectionlist{
 	padding: 5px;
 }
-
-.clearfix {
-	float: none;
-	clear: both;
+#infinitecollectionlistscrollinfo{
+	font-style: italic;
+	background-color: #C3DEFA;
+	padding: 20px;
+	text-align: center;
 }
