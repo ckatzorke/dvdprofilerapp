@@ -3,8 +3,7 @@ function createOverview() {
 		group : "true",
 		success : function(data) {
 			var overview = $.mustache($("#mustache-overview").html(), data);
-			$("#overview").html(overview);
-			$('#carousel-overview').carouFredSel();
+			$("#overviewcontainer").html(overview);
 		}
 	});
 };

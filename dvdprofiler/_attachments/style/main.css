@@ -76,7 +76,11 @@ a:active {
 	float: none;
 	clear: both;
 }
-
+/** overview */
+#overviewcontainer{
+	width: 100%;
+	text-align: right;
+}
 /**infinite list*/
 #infinitecollectionlistcontainer{
 	width: 300px;

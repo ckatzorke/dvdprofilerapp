@@ -96,8 +96,8 @@ public class CollectionXmlStreamProcessor extends AbstractCollectionProcessor {
 										dvd.setCollectionNumber(Integer
 												.parseInt(getElementTextValue(staxReader)));
 									} catch (NumberFormatException e) {
-//										logger.warning("Error parsing as int@"
-//												+ staxReader.getLocation());
+										// logger.warning("Error parsing as int@"
+										// + staxReader.getLocation());
 									}
 								}
 								if (CollectionProcessor.COLLECTION_ELEMENT_COUNTRYOFORIGIN
