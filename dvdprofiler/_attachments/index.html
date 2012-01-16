@@ -50,8 +50,8 @@
 			    <div style="text-align: center"><button onclick="$.unblockUI()">OK</button></div>
 	  		</div>
 	  		<div id="infinitecollectionlistsettings">
-	  		<input type="radio" name="infinitelistview" onchange="infinitelistloadingsettings.loadCounter=0;infinitelistloadingsettings.view=this.value;createInfiniteList();" value="infinitelistcollectionnumber" id="infinitecollectionlistsettings_view_number" checked="checked"/><label for="infinitecollectionlistsettings_view_number">by collection #</label>&nbsp;
-	  		<input type="radio" name="infinitelistview" onchange="infinitelistloadingsettings.loadCounter=0;infinitelistloadingsettings.view=this.value;createInfiniteList();" value="infinitelisttitle" id="infinitecollectionlistsettings_view_title"/><label for="infinitecollectionlistsettings_view_title">by title</label>
+	  		<input type="radio" name="infinitelistview" onchange="infinitelistloadingsettings.loadCounter=0;infinitelistloadingsettings.view=this.value;createInfiniteList();" value="listcollectionnumber" id="infinitecollectionlistsettings_view_number" checked="checked"/><label for="infinitecollectionlistsettings_view_number">by collection #</label>&nbsp;
+	  		<input type="radio" name="infinitelistview" onchange="infinitelistloadingsettings.loadCounter=0;infinitelistloadingsettings.view=this.value;createInfiniteList();" value="listtitle" id="infinitecollectionlistsettings_view_title"/><label for="infinitecollectionlistsettings_view_title">by title</label>
 	  			<br/>
 	  			<input type="radio" name="infinitelistdescending" onchange="infinitelistloadingsettings.loadCounter=0;infinitelistloadingsettings.descending=this.value;createInfiniteList();" value="false" id="infinitecollectionlistsettings_descending_false"/><label for="infinitecollectionlistsettings_descending_false">ascending</label>&nbsp;
 	  			<input type="radio" name="infinitelistdescending" onchange="infinitelistloadingsettings.loadCounter=0;infinitelistloadingsettings.descending=this.value;createInfiniteList();" value="true" checked="checked" id="infinitecollectionlistsettings_descending_true"/><label for="infinitecollectionlistsettings_descending_true">descending</label>
@@ -74,7 +74,7 @@
 	<script type="text/javascript" src="vendor/couchapp/jquery.couchLogin.js"></script>
 	<script type="text/javascript" src="vendor/couchapp/jquery.couchProfile.js"></script>
 	<script type="text/javascript" src="vendor/couchapp/md5.js"></script>
-	<script type="text/javascript" src="vendor/couchapp/jquery.mustache.js"></script>
+	<script type="text/javascript" src="vendor/couchapp/markup.min.js"></script>
 	
 	<!-- third party, jQuery plugins -->
 	<script type="text/javascript" src="script/plugins/jquery.carouFredSel-5.4.1-packed.js"></script>
@@ -82,20 +82,45 @@
 
 
 	<!-- mustache -->
-	<script id="mustache-overview" type="text/x-mustache" charset="utf-8">
-		{{#rows}}
+	<script id="template-overview" type="text/template" charset="utf-8">
+		{{rows}}
 			{{value}}&nbsp;<img src="images/logo/{{key}}.jpg" height="12px">&nbsp;
 		{{/rows}}
 	</script>
-	<script id="mustache-thumbnailgallery" type="text/x-mustache" charset="utf-8">
-		{{#rows}}
+	<script id="template-thumbnailgallery" type="text/template" charset="utf-8">
+		{{rows}}
 			<img src="images/empty.png" original="/dvdprofiler/{{id}}/thumbnail_f" height="81" width="67" title="{{value}}, purchased on {{key}}" alt="{{value}}, purchased on {{key}}" onerror="this.src='images/noimage.jpg';/*$(this).after($('<div>{{value}}</div>').addClass('thumbnailoverlay'))*/">
 		{{/rows}}
 	</script>
-	<script id="mustache-infinitecollectionlist" type="text/x-mustache" charset="utf-8">
-		{{#rows}}
-			{{#value}}<img src="/dvdprofiler/{{id}}/thumbnail_f" height="54" width="45" onerror="this.src='images/noimage.jpg';" />{{collectionNumber}} - {{title}}{{/value}}<br>
+	<script id="template-infinitecollectionlist" type="text/template" charset="utf-8">
+		<table>
+		{{rows}}
+			<tr>
+				<td rowspan="3" class="listthumbnail">
+					<img src="/dvdprofiler/{{value.id}}/thumbnail_f" height="81" width="67" onerror="this.src='images/noimage.jpg';" />
+				</td>
+				<td>
+					<strong>{{value.title}}</strong>
+				</td>
+				<td align="right">
+					<strong>#{{value.collectionNumber}}</strong>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<small>{{value.genres}}</small><br/>
+					<small>Purchased on {{value.purchaseDate}} 
+				</td>
+			</tr>
+			<tr>
+				<td  colspan="2">
+					{{value.media}}
+						<img src="images/logo/{{.}}.jpg" height="12px">&nbsp;
+					{{/value.media}}
+				</td>
+			</tr>
 		{{/rows}}
+		</table>
 	</script>
 
 	<!-- application sripts -->

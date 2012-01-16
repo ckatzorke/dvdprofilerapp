@@ -59,12 +59,12 @@ public class DvdProfilerRepositoryEktorpImpl implements DvdProfilerRepository {
 						+ ") updated.");
 				update = true;
 			} else {
-				logger.info("DVD " + dvd.getTitle() + " (" + dvd.getId()
+				logger.finest("DVD " + dvd.getTitle() + " (" + dvd.getId()
 						+ ") not updated. Skipping...");
 				update = false;
 			}
 		} else {
-			logger.fine("Creating dvd entity " + dvd.getTitle() + " ("
+			logger.info("Creating dvd entity " + dvd.getTitle() + " ("
 					+ dvd.getId() + ")");
 		}
 		if (update) {

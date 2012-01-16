@@ -96,3 +96,8 @@ a:active {
 	padding: 20px;
 	text-align: center;
 }
+.listthumbnail{
+	padding: 3px;
+	vertical-align: middle;
+	text-align: center;
+}

@@ -13,7 +13,7 @@ function createThumbnailGallery() {
 		descending : "true",
 		limit : thumbnailgallerysettings.thumbnailinterval,
 		success : function(data) {
-			var thumbnailgallery = $.mustache($("#mustache-thumbnailgallery")
+			var thumbnailgallery = Mark.up($("#template-thumbnailgallery")
 					.html(), data);
 			$("#carousel-thumbnailgallery").html(thumbnailgallery);
 			$('#carousel-thumbnailgallery').carouFredSel(

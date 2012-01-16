@@ -8,7 +8,7 @@ var infinitelistloadingsettings = {
 	"items" : 50,
 	"loadCounter" : 0,
 	"descending" : true,
-	"view" : "infinitelistcollectionnumber"
+	"view" : "listcollectionnumber"
 }
 /**
  * creates the infinite list container. Create first 100 entries and register
@@ -19,7 +19,7 @@ function createInfiniteList() {
 	// add the scroll handler
 	$(window).bind("scroll resize", function(event) {
 		var postLoad = checkPostLoadInfiniteList();
-		console.log("Ende: " + postLoad);
+//		console.log("Ende: " + postLoad);
 		if (postLoad) {
 			loadInfiniteListItems();
 		}
@@ -51,7 +51,7 @@ function loadInfiniteListItems() {
 			skip : infinitelistloadingsettings.items
 					* infinitelistloadingsettings.loadCounter,
 			success : function(data) {
-				var list = $.mustache($("#mustache-infinitecollectionlist")
+				var list = Mark.up($("#template-infinitecollectionlist")
 						.html(), data);
 				if (infinitelistloadingsettings.loadCounter == 0) {
 					$("#infinitecollectionlist").html(list);
@@ -107,7 +107,6 @@ function checkPostLoadInfiniteList() {
 		return (false);
 	}
 }
-
 $(document).ready(function() {
 	createInfiniteList();
 	// bind help message

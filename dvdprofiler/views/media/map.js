@@ -11,7 +11,7 @@
 function(doc) {
   if(doc.type == "dvdprofilerentry"){
 	  for(var idx in doc.mediaType){
-		  emit(doc.mediaType[idx].toLowerCase() , 1);
+		  emit(doc.mediaType[idx] , 1);
 	  }
   }
 }
