@@ -32,18 +32,7 @@ function createInfiniteList() {
 function loadInfiniteListItems() {
 	if (!INFINITELISTLOADINGMUTEX.locked) {
 		console.log("postloading items for infinite list");
-		$.blockUI({
-			message	:	"Loading new items...",
-			css 	: {
-				border : 'none',
-				padding : '15px',
-				backgroundColor : '#000',
-				'-webkit-border-radius' : '10px',
-				'-moz-border-radius' : '10px',
-				opacity : .5,
-				color : '#fff'
-			}
-		});
+		showLoading();
 		INFINITELISTLOADINGMUTEX.locked = true;
 		db.view(design + "/" + infinitelistloadingsettings.view, {
 			descending : infinitelistloadingsettings.descending,
@@ -60,7 +49,7 @@ function loadInfiniteListItems() {
 				}
 				infinitelistloadingsettings.loadCounter++;
 				INFINITELISTLOADINGMUTEX.locked = false;
-				$.unblockUI();
+				hideLoading();
 			},
 		});
 	}

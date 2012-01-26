@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>DVDProfiler CouchApp</title>
+    <link rel="stylesheet" href="style/main.css" type="text/css">
+    <link rel="stylesheet" href="style/table_all_page.css" type="text/css">
+    <link rel="stylesheet" href="style/table_all_table.css" type="text/css">
+    <link rel="stylesheet" href="style/table_all_table_jui.css" type="text/css">
+  </head>
+  <body>
+  	<div id="wrapper">
+		<div id="header">DVDProfiler CouchApp</div>
+	  	<div id="intro">
+	  		<br>All data is provided by <a href="http://www.invelos.com/">invelos DVDProfiler</a> a totally awesome client application to manage your dvd collection. <br>
+	  		Nevertheless, the online list provided by invelos is <a href="http://www.invelos.com/dvdcollection.aspx/Yubitsume">pretty low level</a>.
+	  		Although there is a project for php (<a href="http://www.phpmyprofiler.de/">phpMyProfiler</a>), it also lacks of UI gimmicks and possibilities to extend the application.<br>
+	  		The idea for DVDProfiler CouchApp was born out of curiosity to learn couchDB, so this showcase application was developed.
+	  	</div>
+	  	<div class="clearfix">&nbsp;</div>
+	  	<div id="tablecontainer">
+	  		<div class="containerheader">
+		  		DVDProfiler table Gallery
+		  		<span style="float:right"><a id="helptablegallery"><img src="images/icons/help.png" height="16" width="16"></a></span>
+	  		</div>
+	  		<div id="helptablegallerymessage" style="display:none; cursor: default">
+	  			<p><strong>About DVDProfiler Table</strong></p>
+			    <div style="text-align: center"><button onclick="$.unblockUI()">OK</button></div>
+	  		</div>
+		    <div id="table">
+		    </div>
+	  	</div>
+  	</div>
+  </body>
+  
+	<!--  built in libraries -->
+<!-- 	<script type="text/javascript" src="/_utils/script/sha1.js"></script> -->
+	<script type="text/javascript" src="vendor/couchapp/jquery-1.7.1.min.js"></script>
+	<script type="text/javascript" src="vendor/couchapp/json2.js"></script>
+	<script type="text/javascript" src="vendor/couchapp/jquery.couch.js"></script>
+	<script type="text/javascript" src="vendor/couchapp/jquery.couchLogin.js"></script>
+	<script type="text/javascript" src="vendor/couchapp/jquery.couchProfile.js"></script>
+	<script type="text/javascript" src="vendor/couchapp/md5.js"></script>
+	<script type="text/javascript" src="vendor/couchapp/markup.min.js"></script>
+	
+	<!-- third party, jQuery plugins -->
+	<script type="text/javascript" src="script/plugins/jquery.blockUI.js"></script>
+	<script type="text/javascript" src="script/plugins/jquery.dataTables.min.js"></script>
+
+
+	<!-- mustache -->
+	<script id="template-table" type="text/template" charset="utf-8">
+		<table id="table_all" style="width:100%">
+			<thead>
+				<tr>
+					<th>&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;&nbsp;&nbsp;&nbsp;</th>
+					<th>Title</th>
+					<th>Genre</th>
+					<th>Media</th>
+					<th>Purchase Date</th>
+				</tr>
+			</thead>
+			<tbody>
+				{{rows}}
+				<tr>
+					<td>{{value.collectionNumber}}</td>
+					<td>{{value.title}}</td>
+					<td>{{value.genres}}{{.}} {{/value.genres}}</td>
+					<td style="width:100px">
+					{{value.media}}
+						<img src="images/logo/{{.}}.jpg" height="12px">&nbsp;
+					{{/value.media}}
+					</td>
+					<td>{{value.purchaseDate}}</td>
+				</tr>
+				{{/rows}}
+			</tbody>
+		</table>
+	</script>
+
+	<!-- application sripts -->
+	<script src="script/app.js"></script>
+	<script src="script/table.js"></script>
+
+</html>

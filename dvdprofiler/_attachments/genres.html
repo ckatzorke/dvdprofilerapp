@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>DVDProfiler CouchApp</title>
+    <link rel="stylesheet" href="style/main.css" type="text/css">
+  </head>
+  <body>
+  	<div id="wrapper">
+		<div id="header">DVDProfiler CouchApp</div>
+	  	<div id="intro">
+	  		<br>All data is provided by <a href="http://www.invelos.com/">invelos DVDProfiler</a> a totally awesome client application to manage your dvd collection. <br>
+	  		Nevertheless, the online list provided by invelos is <a href="http://www.invelos.com/dvdcollection.aspx/Yubitsume">pretty low level</a>.
+	  		Although there is a project for php (<a href="http://www.phpmyprofiler.de/">phpMyProfiler</a>), it also lacks of UI gimmicks and possibilities to extend the application.<br>
+	  		The idea for DVDProfiler CouchApp was born out of curiosity to learn couchDB, so this showcase application was developed.
+	  	</div>
+	  	<div class="clearfix">&nbsp;</div>
+	  	<div id="genrescontainer">
+	  		<div class="containerheader">
+		  		DVDProfiler Genres Gallery
+		  		<span style="float:right"><a id="helpgenresgallery"><img src="images/icons/help.png" height="16" width="16"></a></span>
+	  		</div>
+	  		<div id="helpgenresgallerymessage" style="display:none; cursor: default">
+	  			<p><strong>About DVDProfiler Genres Gallery</strong></p>
+			    <div style="text-align: center"><button onclick="$.unblockUI()">OK</button></div>
+	  		</div>
+		    <div id="genresgallery">
+		    </div>
+	  	</div>
+  	</div>
+  </body>
+  
+	<!--  built in libraries -->
+<!-- 	<script type="text/javascript" src="/_utils/script/sha1.js"></script> -->
+	<script type="text/javascript" src="vendor/couchapp/jquery-1.7.1.min.js"></script>
+	<script type="text/javascript" src="vendor/couchapp/json2.js"></script>
+	<script type="text/javascript" src="vendor/couchapp/jquery.couch.js"></script>
+	<script type="text/javascript" src="vendor/couchapp/jquery.couchLogin.js"></script>
+	<script type="text/javascript" src="vendor/couchapp/jquery.couchProfile.js"></script>
+	<script type="text/javascript" src="vendor/couchapp/md5.js"></script>
+	<script type="text/javascript" src="vendor/couchapp/markup.min.js"></script>
+	
+	<!-- third party, jQuery plugins -->
+	<script type="text/javascript" src="script/plugins/jquery.blockUI.js"></script>
+	<script type="text/javascript" src="script/plugins/mobilynotes.js"></script>
+
+
+	<!-- mustache -->
+	<script id="template-genres" type="text/template" charset="utf-8">
+		<div class="genre">
+			<a href="">{{key}}</a><br>
+			<div class="notes {{key|pack}}">
+			{{preview}}
+				<div class="note">
+					<img src="/dvdprofiler/{{_id}}/thumbnail_f" height="215" width="180" onerror="this.src='images/noimage.jpg';" />
+				</div>
+			{{/preview}}
+			</div>	
+		</div>
+	</script>
+
+	<!-- application sripts -->
+	<script src="script/app.js"></script>
+	<script src="script/genres.js"></script>
+
+</html>
