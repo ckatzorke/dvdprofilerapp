@@ -8,6 +8,7 @@ import org.dvdprofilerapp.DvdProfilerRepository;
 import org.dvdprofilerapp.model.DVD;
 import org.ektorp.AttachmentInputStream;
 import org.ektorp.DocumentNotFoundException;
+import org.ektorp.UpdateConflictException;
 import org.springframework.beans.BeanUtils;
 import org.springframework.core.io.FileSystemResource;
 
@@ -72,17 +73,25 @@ public class DvdProfilerRepositoryEktorpImpl implements DvdProfilerRepository {
 			if (isnew) {
 				repo.add(couchDVD);
 			} else {
-				repo.update(couchDVD);
-				// delete attachments if any
-				String newRev = repo.getDB().deleteAttachment(couchDVD.getId(),
-						couchDVD.getRevision(), "thumbnail_" + ThumbnailType.f);
-				if (newRev != null) {
-					couchDVD.setRevision(newRev);
-				}
-				newRev = repo.getDB().deleteAttachment(couchDVD.getId(),
-						couchDVD.getRevision(), "thumbnail_" + ThumbnailType.b);
-				if (newRev != null) {
-					couchDVD.setRevision(newRev);
+				try {
+					repo.update(couchDVD);
+					// delete attachments if any
+					String newRev = repo.getDB().deleteAttachment(
+							couchDVD.getId(), couchDVD.getRevision(),
+							"thumbnail_" + ThumbnailType.f);
+					if (newRev != null) {
+						couchDVD.setRevision(newRev);
+					}
+					newRev = repo.getDB().deleteAttachment(couchDVD.getId(),
+							couchDVD.getRevision(),
+							"thumbnail_" + ThumbnailType.b);
+					if (newRev != null) {
+						couchDVD.setRevision(newRev);
+					}
+				} catch (UpdateConflictException uc) {
+					logger.info("Error updating. Deleting and creating new...");
+					repo.remove(couchDVD);
+					writeDvd(dvd);
 				}
 			}
 			if (attachEnabled()) {
