@@ -14,6 +14,7 @@
 	  		The idea for DVDProfiler CouchApp was born out of curiosity to learn couchDB, so this showcase application was developed.
 	  	</div>
 	  	<div class="clearfix">&nbsp;</div>
+	  	<div class="clearfix"><a href="index.html">Home</a> | <a href="thumbnail.html">Thumbnail-Gallery</a> | <a href="genres.html">Genres</a> | <a href="table.html">Table</a></div>
 	  	<div id="genrescontainer">
 	  		<div class="containerheader">
 		  		DVDProfiler Genres Gallery
@@ -46,16 +47,11 @@
 
 	<!-- mustache -->
 	<script id="template-genres" type="text/template" charset="utf-8">
+		{{rows}}
 		<div class="genre">
-			<a href="">{{key}}</a><br>
-			<div class="notes {{key|pack}}">
-			{{preview}}
-				<div class="note">
-					<img src="/dvdprofiler/{{_id}}/thumbnail_f" height="215" width="180" onerror="this.src='images/noimage.jpg';" />
-				</div>
-			{{/preview}}
-			</div>	
+			<a href="">{{key}} ({{value}})</a>
 		</div>
+		{{/rows}}
 	</script>
 
 	<!-- application sripts -->

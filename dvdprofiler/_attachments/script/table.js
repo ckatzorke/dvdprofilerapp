@@ -1,7 +1,7 @@
 var genres = new Array();
 function createTable() {
 	showLoading();
-	db.view(design + "/listtitle", {
+	db.view(design + "/table", {
 		success : function(data) {
 			console.log("möüp");
 			var markup = Mark.up($('#template-table').html(), data);

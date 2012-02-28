@@ -17,6 +17,7 @@
 	  		The idea for DVDProfiler CouchApp was born out of curiosity to learn couchDB, so this showcase application was developed.
 	  	</div>
 	  	<div class="clearfix">&nbsp;</div>
+	  	<div class="clearfix"><a href="index.html">Home</a> | <a href="thumbnail.html">Thumbnail-Gallery</a> | <a href="genres.html">Genres</a> | <a href="table.html">Table</a></div>
 	  	<div id="tablecontainer">
 	  		<div class="containerheader">
 		  		DVDProfiler table Gallery
@@ -55,7 +56,9 @@
 					<th>&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;&nbsp;&nbsp;&nbsp;</th>
 					<th>Title</th>
 					<th>Genre</th>
-					<th>Media</th>
+					<th><img src="images/logo/BluRay.jpg" height="12px" width="25px"></th>
+					<th><img src="images/logo/DVD.jpg" height="12px" width="25px"></th>
+					<th><img src="images/logo/HDDVD.jpg" height="12px" width="25px"></th>
 					<th>Purchase Date</th>
 				</tr>
 			</thead>
@@ -65,11 +68,9 @@
 					<td>{{value.collectionNumber}}</td>
 					<td>{{value.title}}</td>
 					<td>{{value.genres}}{{.}} {{/value.genres}}</td>
-					<td style="width:100px">
-					{{value.media}}
-						<img src="images/logo/{{.}}.jpg" height="12px">&nbsp;
-					{{/value.media}}
-					</td>
+					<td {{if value.isBluray}}class="selected"{{/if}}>&nbsp;</td>
+					<td {{if value.isDvd}}class="selected"{{/if}}>&nbsp;</td>
+					<td {{if value.isHddvd}}class="selected"{{/if}}>&nbsp;</td>
 					<td>{{value.purchaseDate}}</td>
 				</tr>
 				{{/rows}}

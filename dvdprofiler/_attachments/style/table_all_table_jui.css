@@ -235,7 +235,7 @@ table.display td.center {
  * DataTables row classes
  */
 table.display tr.odd.gradeA {
-	background-color: #ddffdd;
+	background-color: #D6DCFF;
 }
 
 table.display tr.even.gradeA {
@@ -279,7 +279,7 @@ table.display tr.even.gradeU {
 
 
 tr.odd {
-	background-color: #E2E4FF;
+	background-color: #EDEEFA;
 }
 
 tr.even {

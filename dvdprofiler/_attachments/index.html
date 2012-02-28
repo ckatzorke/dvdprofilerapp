@@ -15,30 +15,8 @@
 	  		The idea for DVDProfiler CouchApp was born out of curiosity to learn couchDB, so this showcase application was developed.
 	  	</div>
 	  	<div class="clearfix">&nbsp;</div>
+	  	<div style="float:left"><a href="index.html">Home</a> | <a href="thumbnail.html">Thumbnail-Gallery</a> | <a href="genres.html">Genres</a> | <a href="table.html">Table</a></div>
 	  	<div id="overviewcontainer">
-	  	</div>
-	  	<div id="thumbnailgallerycontainer">
-	  		<div class="containerheader">
-		  		DVDProfiler Thumbnail Gallery
-		  		<span style="float:right"><a id="helpthumbnailgallery"><img src="images/icons/help.png" height="16" width="16"></a></span>
-	  		</div>
-	  		<div id="helpthumbnailgallerymessage" style="display:none; cursor: default">
-	  			<p><strong>About DVDProfiler Thumbnail Gallery</strong></p>
-	  			<p>Thumbnail gallery using <a href="http://caroufredsel.frebsite.nl/">carouFredSel</a> as a jQuery carousel plugin, adding a few additional functions. like lazy loading.<br>
-	  			It uses a CouchDB <a href="http://localhost:5984/dvdprofiler/_design/dvdprofiler/_view/thumbnailgallery?descending=true">view</a>, that emits all docs with the purchase date as key (descending).<br>
-			    <ul>
-				    <li class="advantage">Out-of-the-box plugin with nice UI and feature set</li>
-				    <li class="advantage">Thumbnails are loaded lazily, inspired by jQuery lazy load (which won't work here), the images are loaded before they enter the viewable area, using the onBefore callback from caroufredsel, and the first set using onCreate respectively.</li>
-				   	<li class="disadvantage">All items are loaded (since dynamically inserting items behaves really strange), which results in pretty large html and memory usage.</li>
-				   	<li class="disadvantage">not yet responsive :-(</li>
-			    </ul>
-			    <div style="text-align: center"><button onclick="$.unblockUI()">OK</button></div>
-	  		</div>
-		    <div id="thumbnailgallery" class="image_carousel">
-				<div id="carousel-thumbnailgallery" >
-				</div>
-				<div class="clearfix"></div>
-		    </div>
 	  	</div>
 	  	<div id="infinitecollectionlistcontainer">
 	  		<div class="containerheader">
@@ -84,7 +62,6 @@
 	<script type="text/javascript" src="vendor/couchapp/markup.min.js"></script>
 	
 	<!-- third party, jQuery plugins -->
-	<script type="text/javascript" src="script/plugins/jquery.carouFredSel-5.4.1-packed.js"></script>
 	<script type="text/javascript" src="script/plugins/jquery.blockUI.js"></script>
 
 
@@ -92,11 +69,6 @@
 	<script id="template-overview" type="text/template" charset="utf-8">
 		{{rows}}
 			{{value}}&nbsp;<img src="images/logo/{{key}}.jpg" height="12px">&nbsp;
-		{{/rows}}
-	</script>
-	<script id="template-thumbnailgallery" type="text/template" charset="utf-8">
-		{{rows}}
-			<img src="images/empty.png" original="/dvdprofiler/{{id}}/thumbnail_f" height="81" width="67" title="{{value}}, purchased on {{key}}" alt="{{value}}, purchased on {{key}}" onerror="this.src='images/noimage.jpg';/*$(this).after($('<div>{{value}}</div>').addClass('thumbnailoverlay'))*/">
 		{{/rows}}
 	</script>
 	<script id="template-infinitecollectionlist" type="text/template" charset="utf-8">
@@ -133,7 +105,6 @@
 	<!-- application sripts -->
 	<script src="script/app.js"></script>
 	<script src="script/overview.js"></script>
-	<script src="script/thumbnailgallery.js"></script>
 	<script src="script/infinitecollectionlist.js"></script>
 	<script src="script/details.js"></script>
 
