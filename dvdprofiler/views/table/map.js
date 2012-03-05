@@ -15,6 +15,9 @@ function(doc) {
 			 hddvd = true;
 		 }
 	 }
-	emit(doc.title, {"id": doc._id, "collectionNumber" : doc.collectionNumber, "title": doc.title, "genres": doc.genres, "isBluray": blu, "isDvd": dvd, "isHddvd": hddvd, "purchaseDate" : doc.purchaseDate});
+	var country = doc.countryOfOrigin;
+	if(country=="")
+		country="unknown";
+	emit(doc.title, {"id": doc._id, "collectionNumber" : doc.collectionNumber, "title": doc.title, "genres": doc.genres, "isBluray": blu, "isDvd": dvd, "isHddvd": hddvd, "purchaseDate" : doc.purchaseDate, "country": country});
  }
 }

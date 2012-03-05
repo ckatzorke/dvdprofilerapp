@@ -4,6 +4,7 @@
     <title>DVDProfiler CouchApp</title>
     <link rel="stylesheet" href="style/main.css" type="text/css">
     <link rel="stylesheet" href="style/thumbnailgallery.caroufredsel.css" type="text/css">
+    <link rel="stylesheet" href="style/jquery.fancybox.css" type="text/css">
   </head>
   <body>
   	<div id="wrapper">
@@ -25,6 +26,12 @@
 	  		</div>
 	  		<div id="helpinfinitecollectionlistmessage" style="display:none; cursor: default">
 	  			<p><strong>About DVDProfiler Infinite Collection List</strong></p>
+	  			<p>Credits</p>
+	  			<ul>
+	  				<li><a href="http://www.bennadel.com/blog/1801-Creating-An-Infinite-Scroll-Effect-With-jQuery-And-ColdFusion.htm">http://www.bennadel.com/blog/1801-Creating-An-Infinite-Scroll-Effect-With-jQuery-And-ColdFusion.htm</a></li>
+	  				<li><a href="https://github.com/adammark/Markup.js/tree/">Markup js</a></li>
+	  				<li><a href="http://jquery.malsup.com/block/">nlockUI</a></li>
+	  			</ul>
 			    <div style="text-align: center"><button onclick="$.unblockUI()">OK</button></div>
 	  		</div>
 	  		<div id="infinitecollectionlistsettings">
@@ -36,16 +43,6 @@
 	  		</div>
 	  		<div id="infinitecollectionlist"><img src="images/loading.gif" height="16" width="16"></div>
 	  		<div id="infinitecollectionlistscrollinfo">Scroll for more...</div>
-	  	</div>
-	  	<div id="detailscontainer">
-	  		<div class="containerheader">
-		  		DVDProfiler Details
-		  		<span style="float:right"><a id="helpdetails"><img src="images/icons/help.png" height="16" width="16"></a></span>
-	  		</div>
-	  		<div id="helpdetailsmessage" style="display:none; cursor: default">
-	  			<p><strong>About DVDProfiler Details</strong></p>
-			    <div style="text-align: center"><button onclick="$.unblockUI()">OK</button></div>
-	  		</div>
 	  	</div>
 
   	</div>
@@ -63,6 +60,7 @@
 	
 	<!-- third party, jQuery plugins -->
 	<script type="text/javascript" src="script/plugins/jquery.blockUI.js"></script>
+	<script type="text/javascript" src="script/plugins/jquery.fancybox.pack.js"></script>
 
 
 	<!-- mustache -->
@@ -72,30 +70,39 @@
 		{{/rows}}
 	</script>
 	<script id="template-infinitecollectionlist" type="text/template" charset="utf-8">
-		<table>
+		<table class="infinitecollectiontable">
 		{{rows}}
-			<tr>
-				<td rowspan="3" class="listthumbnail">
-					<img src="/dvdprofiler/{{value.id}}/thumbnail_f" height="81" width="67" onerror="this.src='images/noimage.jpg';" />
+			<tr >
+				<td rowspan="3" class="listthumbnail infinitelist-{{if #|even}}{{else}}odd{{/if}}">
+					<a class="fancybox" href="#{{value.id|replace>.>_}}"><img class="thumbnail" src="/dvdprofiler/{{value.id}}/thumbnail_f" onerror="this.src='images/noimage.jpg';"  /></a>
+					<div id="{{value.id|replace>.>_}}" style="display:none"><img src="/dvdprofiler/{{value.id}}/cover_f" onerror="this.src='images/noimage.jpg';"  />&nbsp;<img src="/dvdprofiler/{{value.id}}/cover_b" onerror="this.src='images/noimage.jpg';"  /></div>
 				</td>
-				<td>
+				<td  class="infinitelist-{{if #|even}}{{else}}odd{{/if}}">
 					<strong>{{value.title}}</strong>
 				</td>
-				<td align="right">
+				<td  class="infinitelist-{{if #|even}}{{else}}odd{{/if}}">
+					{{value.country}}
+				</td>
+				<td align="right"  class="infinitelist-{{if #|even}}{{else}}odd{{/if}}">
 					<strong>#{{value.collectionNumber}}</strong>
 				</td>
 			</tr>
 			<tr>
-				<td colspan="2">
-					<small>{{value.genres}}</small><br/>
+				<td class="infinitelist-{{if #|even}}{{else}}odd{{/if}}">
+					<small>{{value.genres|join>&nbsp;&#124;&nbsp;}}</small><br/>
+				</td>
+				<td class="infinitelist-{{if #|even}}{{else}}odd{{/if}}">
 					<small>Purchased on {{value.purchaseDate}} 
 				</td>
-			</tr>
-			<tr>
-				<td  colspan="2">
+				<td align="right" class="infinitelist-{{if #|even}}{{else}}odd{{/if}}">
 					{{value.media}}
 						<img src="images/logo/{{.}}.jpg" height="12px">&nbsp;
 					{{/value.media}}
+				</td>
+			</tr>
+			<tr>
+				<td  colspan="3" class="infinitelist-{{if #|even}}{{else}}odd{{/if}}">
+					<div class="overview">{{value.description}}</div>
 				</td>
 			</tr>
 		{{/rows}}

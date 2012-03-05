@@ -56,6 +56,7 @@
 					<th>&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;&nbsp;&nbsp;&nbsp;</th>
 					<th>Title</th>
 					<th>Genre</th>
+					<th>Country</th>
 					<th><img src="images/logo/BluRay.jpg" height="12px" width="25px"></th>
 					<th><img src="images/logo/DVD.jpg" height="12px" width="25px"></th>
 					<th><img src="images/logo/HDDVD.jpg" height="12px" width="25px"></th>
@@ -66,8 +67,9 @@
 				{{rows}}
 				<tr>
 					<td>{{value.collectionNumber}}</td>
-					<td>{{value.title}}</td>
+					<td><div id="{{id}}">{{value.title}}</div></td>
 					<td>{{value.genres}}{{.}} {{/value.genres}}</td>
+					<td>{{value.country}}</td>
 					<td {{if value.isBluray}}class="selected"{{/if}}>&nbsp;</td>
 					<td {{if value.isDvd}}class="selected"{{/if}}>&nbsp;</td>
 					<td {{if value.isHddvd}}class="selected"{{/if}}>&nbsp;</td>

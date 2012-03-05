@@ -112,8 +112,9 @@ public class CollectionXmlStreamProcessor extends AbstractCollectionProcessor {
 										&& !CollectionProcessor.COLLECTION_ELEMENT_MEDIA_TYPE
 												.equals(context
 														.getPreviousElement())) {
-
-									dvd.setOverview(getElementTextValue(staxReader));
+String overview = getElementTextValue(staxReader).trim();
+overview = overview.replaceAll("\\n", "<br>");
+									dvd.setOverview(overview);
 								}
 								if (CollectionProcessor.COLLECTION_ELEMENT_MEDIA_TYPES
 										.equals(staxReader.getLocalName())) {

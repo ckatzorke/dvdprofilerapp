@@ -5,6 +5,7 @@ import org.dvdprofilerapp.model.DVD;
 import org.dvdprofilerapp.model.mixin.DVDMixin;
 import org.dvdprofilerapp.xml.CollectionProcessor;
 import org.dvdprofilerapp.xml.DVDEventListener;
+import org.dvdprofilerapp.xml.listener.DVDCounter;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -24,6 +25,7 @@ public class Import implements InitializingBean {
 				.getBean(CollectionProcessor.class);
 		DVDEventListener persister = appCtx.getBean(DVDEventListener.class);
 		collectionProcessor.addDVDEventListener(persister);
+		collectionProcessor.addDVDEventListener(new DVDCounter());
 		long now = System.currentTimeMillis();
 		try {
 			System.out.println("**************************************");

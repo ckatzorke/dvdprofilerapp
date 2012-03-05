@@ -10,6 +10,7 @@ public class DVDCounter implements DVDEventListener {
 	@Override
 	public void onEvent(DVDEvent event) {
 		counter++;
+		System.out.println("#" + counter);
 	}
 
 	public int getCounter() {

@@ -48,6 +48,7 @@ function loadInfiniteListItems() {
 					$("#infinitecollectionlist").append(list);
 				}
 				infinitelistloadingsettings.loadCounter++;
+				$(".fancybox").fancybox();
 				INFINITELISTLOADINGMUTEX.locked = false;
 				hideLoading();
 			},
@@ -96,6 +97,11 @@ function checkPostLoadInfiniteList() {
 		return (false);
 	}
 }
+
+Mark.pipes.replace = function (str, n, m) {
+    return str.replace(n, m);
+};
+
 $(document).ready(function() {
 	createInfiniteList();
 	// bind help message
