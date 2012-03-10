@@ -2,7 +2,10 @@ package org.dvdprofilerapp.xml.stax;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Logger;
 
 import javax.xml.stream.XMLInputFactory;
@@ -25,6 +28,9 @@ public class CollectionXmlStreamProcessor extends AbstractCollectionProcessor {
 	public void setCollectionXmlResource(Resource collectionXmlResource) {
 		this.collectionXmlResource = collectionXmlResource;
 	}
+
+	private Map<String, DVD> dvds = new HashMap<String, DVD>();
+	private Map<String, List<DVD>> missingParents = new HashMap<String, List<DVD>>();
 
 	@Override
 	public void process() {
@@ -112,8 +118,10 @@ public class CollectionXmlStreamProcessor extends AbstractCollectionProcessor {
 										&& !CollectionProcessor.COLLECTION_ELEMENT_MEDIA_TYPE
 												.equals(context
 														.getPreviousElement())) {
-String overview = getElementTextValue(staxReader).trim();
-overview = overview.replaceAll("\\n", "<br>");
+									String overview = getElementTextValue(
+											staxReader).trim();
+									overview = overview.replaceAll("\\n",
+											"<br>");
 									dvd.setOverview(overview);
 								}
 								if (CollectionProcessor.COLLECTION_ELEMENT_MEDIA_TYPES
@@ -183,7 +191,46 @@ overview = overview.replaceAll("\\n", "<br>");
 										&& !context
 												.getPreviousElement()
 												.equals(CollectionProcessor.COLLECTION_ELEMENT_DVD)) {
-									sendEvent(dvd);
+									if (dvd.getParentUpc() != null) {
+										// get parent DVD entry
+										DVD parent = dvds.get(dvd
+												.getParentUpc());
+										if (parent == null) {
+											// no parent yet, store in missing
+											// parents
+											List<DVD> childs = missingParents
+													.get(parent);
+											if (childs == null) {
+												childs = new ArrayList<DVD>();
+											}
+											childs.add(dvd);
+											missingParents.put(
+													dvd.getParentUpc(), childs);
+										} else {
+											// otherwise, add to childprofiles
+											DVD[] childProfiles = parent
+													.getChildProfiles();
+											if (childProfiles == null) {
+												childProfiles = new DVD[] { dvd };
+											} else {
+												childProfiles = Arrays
+														.copyOf(childProfiles,
+																childProfiles.length + 1);
+												childProfiles[childProfiles.length - 1] = dvd;
+											}
+											parent.setChildProfiles(childProfiles);
+										}
+									} else {
+										// chick if it is a boxset and there are
+										// childs in missingchild map
+										List<DVD> childs = missingParents
+												.remove(dvd.getId());
+										if (childs != null) {
+											dvd.setChildProfiles(childs
+													.toArray(new DVD[] {}));
+										}
+										dvds.put(dvd.getId(), dvd);
+									}
 									dvd = null;
 									break;
 								}
@@ -195,6 +242,23 @@ overview = overview.replaceAll("\\n", "<br>");
 				}
 			}
 			staxReader.close();
+			// now cleanup missing parents
+			if (!missingParents.isEmpty()) {
+				for (String parentId : missingParents.keySet()) {
+					List<DVD> childs = missingParents.get(parentId);
+					if (childs != null) {
+						DVD dvd = dvds.get(parentId);
+						if (dvd != null) {
+							dvd.setChildProfiles(childs.toArray(new DVD[] {}));
+						}
+					}
+				}
+			}
+			missingParents = null;
+			for (DVD dvd : dvds.values()) {
+				sendEvent(dvd);
+			}
+			dvds = null;
 		} catch (XMLStreamException e) {
 			throw new IllegalArgumentException("stream execption!", e);
 		} catch (IOException e) {

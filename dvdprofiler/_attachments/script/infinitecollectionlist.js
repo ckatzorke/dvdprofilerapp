@@ -10,6 +10,20 @@ var infinitelistloadingsettings = {
 	"descending" : true,
 	"view" : "listcollectionnumber"
 }
+
+function handleListChange(view){
+	infinitelistloadingsettings.loadCounter=0;
+	if(infinitelistloadingsettings.view==view){
+		//invert sorting
+		infinitelistloadingsettings.descending=!infinitelistloadingsettings.descending;
+		console.log("Chnaging sorting to descending=" +infinitelistloadingsettings.descending );		
+	} else {
+		infinitelistloadingsettings.view=view;
+		infinitelistloadingsettings.descending=false;
+		console.log("Changing view to " + view);
+	}
+	createInfiniteList();
+}
 /**
  * creates the infinite list container. Create first 100 entries and register
  * for post loading

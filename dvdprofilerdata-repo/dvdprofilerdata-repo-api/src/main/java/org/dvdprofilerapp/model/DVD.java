@@ -15,6 +15,7 @@ public class DVD {
 	private String countryOfOrigin;
 	private String[] genres;
 	private String purchaseDate;
+	private DVD[] childProfiles;
 
 	public String getId() {
 		return id;
@@ -102,6 +103,14 @@ public class DVD {
 
 	public String getPurchaseDate() {
 		return purchaseDate;
+	}
+
+	public DVD[] getChildProfiles() {
+		return childProfiles;
+	}
+
+	public void setChildProfiles(DVD[] childProfiles) {
+		this.childProfiles = childProfiles;
 	}
 
 	@Override
