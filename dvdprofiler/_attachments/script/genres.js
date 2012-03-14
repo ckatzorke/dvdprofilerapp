@@ -14,8 +14,4 @@ function createGenres() {
 
 $(document).ready(function() {
 	createGenres();
-	// bind help message
-	$('#helpgenresgallery').click(function() {
-		doHelpMessage($("#helpgenresgallerymessage"));
-	});
 });

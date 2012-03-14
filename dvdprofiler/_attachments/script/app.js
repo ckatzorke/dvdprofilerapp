@@ -71,3 +71,21 @@ function showLoading(){
 function hideLoading(){
 	$.unblockUI();
 }
+
+$(document).ready(function() {
+	db.view(design + "/overview", {
+		reduce : true,
+		success : function(data) {
+			var total = data.rows[0].value;
+			var randomBG = Math.round(Math.random()*total);
+			db.view(design + "/details", {
+				limit : 1,
+				skip : randomBG,
+				success : function(data) {
+					var randomBGId = data.rows[0].id;
+					$("body").css("background-image", "url(/dvdprofiler/" + randomBGId + "/cover_f)")
+				},
+			});
+		},
+	});
+});

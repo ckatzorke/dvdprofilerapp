@@ -118,8 +118,4 @@ Mark.pipes.replace = function (str, n, m) {
 
 $(document).ready(function() {
 	createInfiniteList();
-	// bind help message
-	$('#helpinfinitecollectionlist').click(function() {
-		doHelpMessage($("#helpinfinitecollectionlistmessage"));
-	});
 });

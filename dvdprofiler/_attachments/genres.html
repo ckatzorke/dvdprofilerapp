@@ -6,28 +6,39 @@
   </head>
   <body>
   	<div id="wrapper">
-		<div id="header">DVDProfiler CouchApp</div>
-	  	<div id="intro">
-	  		<br>All data is provided by <a href="http://www.invelos.com/">invelos DVDProfiler</a> a totally awesome client application to manage your dvd collection. <br>
-	  		Nevertheless, the online list provided by invelos is <a href="http://www.invelos.com/dvdcollection.aspx/Yubitsume">pretty low level</a>.
-	  		Although there is a project for php (<a href="http://www.phpmyprofiler.de/">phpMyProfiler</a>), it also lacks of UI gimmicks and possibilities to extend the application.<br>
-	  		The idea for DVDProfiler CouchApp was born out of curiosity to learn couchDB, so this showcase application was developed.
-	  	</div>
+		<div id="header" onclick="doHelpMessage($('#helpcouchappmessage'));">DVDProfiler CouchApp</div>
 	  	<div class="clearfix">&nbsp;</div>
 	  	<div class="clearfix"><a href="index.html">Home</a> | <a href="thumbnail.html">Thumbnail-Gallery</a> | <a href="genres.html">Genres</a> | <a href="table.html">Table</a></div>
 	  	<div id="genrescontainer">
-	  		<div class="containerheader">
-		  		DVDProfiler Genres Gallery
-		  		<span style="float:right"><a id="helpgenresgallery"><img src="images/icons/help.png" height="16" width="16"></a></span>
-	  		</div>
-	  		<div id="helpgenresgallerymessage" style="display:none; cursor: default">
-	  			<p><strong>About DVDProfiler Genres Gallery</strong></p>
-			    <div style="text-align: center"><button onclick="$.unblockUI()">OK</button></div>
-	  		</div>
 		    <div id="genresgallery">
 		    </div>
 	  	</div>
   	</div>
+  	<div id="helpcouchappmessage" style="display:none; cursor: default">
+ 		<p><strong>About DVDProfiler CouchApp</strong></p>
+		<p>
+			<br>All data is provided by <a href="http://www.invelos.com/">invelos
+				DVDProfiler</a> a totally awesome client application to manage your
+			dvd collection. <br> Nevertheless, the online list provided by
+			invelos is <a
+				href="http://www.invelos.com/dvdcollection.aspx/Yubitsume">pretty
+				low level</a>. Although there is a project for php (<a
+				href="http://www.phpmyprofiler.de/">phpMyProfiler</a>), it also
+			lacks of UI gimmicks and possibilities to extend the application.<br>
+			The idea for DVDProfiler CouchApp was born out of curiosity to
+			learn couchDB, so this showcase application was developed.
+		</p>
+		<p>Credits</p>
+ 			<ul>
+ 				<li><a href="http://www.bennadel.com/blog/1801-Creating-An-Infinite-Scroll-Effect-With-jQuery-And-ColdFusion.htm">http://www.bennadel.com/blog/1801-Creating-An-Infinite-Scroll-Effect-With-jQuery-And-ColdFusion.htm</a></li>
+ 				<li><a href="https://github.com/adammark/Markup.js/tree/">Markup js</a></li>
+ 				<li><a href="http://jquery.malsup.com/block/">blockUI</a></li>
+ 				<li><a href="http://fancybox.net/">fancybox</a></li>
+ 				<li><a href="http://datatables.net/">DataTables</a></li>
+ 				<li><a href="http://caroufredsel.frebsite.nl/">carouFredSel</a></li>
+ 			</ul>
+	    <div style="text-align: center"><button onclick="$.unblockUI()">OK</button></div>
+	</div>
   </body>
   
 	<!--  built in libraries -->
