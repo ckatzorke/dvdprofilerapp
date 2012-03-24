@@ -8,22 +8,41 @@ var infinitelistloadingsettings = {
 	"items" : 50,
 	"loadCounter" : 0,
 	"descending" : true,
-	"view" : "listcollectionnumber"
+	"view" : ""
 }
 
 function handleListChange(view){
 	infinitelistloadingsettings.loadCounter=0;
+	rotateButton($('#button-listcollectionnumber'), 0);
+	rotateButton($('#button-listtitle'), 0);
+	$('#button-listcollectionnumber').removeClass('selected');
+	$('#button-listtitle').removeClass('selected');
+	$('#button-'+view).addClass('selected');
 	if(infinitelistloadingsettings.view==view){
 		//invert sorting
 		infinitelistloadingsettings.descending=!infinitelistloadingsettings.descending;
-		console.log("Chnaging sorting to descending=" +infinitelistloadingsettings.descending );		
+		if(infinitelistloadingsettings.descending){
+			rotateButton($('#button-'+view), 15);
+		} else {
+			rotateButton($('#button-'+view), -15);
+		}
+		console.log("Changing sorting to descending=" +infinitelistloadingsettings.descending );		
 	} else {
 		infinitelistloadingsettings.view=view;
 		infinitelistloadingsettings.descending=false;
+		rotateButton($('#button-'+view), -15);
 		console.log("Changing view to " + view);
 	}
 	createInfiniteList();
 }
+
+function rotateButton(button, deg){
+	button.css('-moz-transform', 'rotate('+deg+'deg)');
+	button.css('-webkit-transform', 'rotate('+deg+'deg)');
+	button.css('-o-transform', 'rotate('+deg+'deg)');;
+	button.css('transform', 'rotate('+deg+'deg)');
+}
+
 /**
  * creates the infinite list container. Create first 100 entries and register
  * for post loading
@@ -117,5 +136,5 @@ Mark.pipes.replace = function (str, n, m) {
 };
 
 $(document).ready(function() {
-	createInfiniteList();
+	handleListChange('listcollectionnumber');
 });
