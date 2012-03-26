@@ -15,8 +15,9 @@
 	  	</div>
 	  	<div id="infinitecollectionlistcontainer">
 	  		<div id="infinitecollectionlistsettings">
+	  			<a href="#" id="button-listcollectionnumber" class="button" onclick="handleListChange('listcollectionnumber')">Collection #</a>&nbsp;
 	  			<a href="#" id="button-listtitle" class="button" onclick="handleListChange('listtitle')">Title</a>&nbsp;
-	  			<a href="#" id="button-listcollectionnumber" class="button desc" onclick="handleListChange('listcollectionnumber')">Collection #</a><br>
+	  			<a href="#" id="button-listpurchasedate" class="button" onclick="handleListChange('listpurchasedate')">Purchase Date</a>&nbsp;
 	  		</div>
 	  		<div id="infinitecollectionlist"><img src="images/loading.gif" height="16" width="16"></div>
 	  		<div id="infinitecollectionlistscrollinfo">Scroll for more...</div>
@@ -76,8 +77,7 @@
 		{{rows}}
 			<tr >
 				<td rowspan="3" class="listthumbnail infinitelist-{{if #|even}}{{else}}odd{{/if}}">
-					<a class="fancybox" href="#{{value.id|replace>.>_}}"><img class="thumbnail" src="/dvdprofiler/{{value.id}}/thumbnail_f" onerror="this.src='images/noimage.jpg';"  /></a>
-					<div id="{{value.id|replace>.>_}}" style="display:none"><img src="/dvdprofiler/{{value.id}}/cover_f" onerror="this.src='images/noimage.jpg';"  />&nbsp;<img src="/dvdprofiler/{{value.id}}/cover_b" onerror="this.src='images/noimage.jpg';"  /></div>
+					<a id="{{value.id}}" onclick="openDetails(this.id)" href="javascript:;"><img class="thumbnail" src="/dvdprofiler/{{value.id}}/thumbnail_f" onerror="this.src='images/nocover.gif';"  /></a>
 				</td>
 				<td  class="infinitelist-{{if #|even}}{{else}}odd{{/if}}">
 					<strong>{{value.title}}</strong>
@@ -110,7 +110,7 @@
 		{{/rows}}
 		</table>
 	</script>
-
+	
 	<!-- application sripts -->
 	<script src="script/app.js"></script>
 	<script src="script/overview.js"></script>

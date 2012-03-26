@@ -1,6 +1,7 @@
 /**
  * Globals
  */
+var views = new Array("listcollectionnumber", "listtitle", "listpurchasedate");
 var INFINITELISTLOADINGMUTEX = {
 	"locked" : false
 };
@@ -13,11 +14,11 @@ var infinitelistloadingsettings = {
 
 function handleListChange(view){
 	infinitelistloadingsettings.loadCounter=0;
-	rotateButton($('#button-listcollectionnumber'), 0);
-	rotateButton($('#button-listtitle'), 0);
-	$('#button-listcollectionnumber').removeClass('selected');
-	$('#button-listtitle').removeClass('selected');
-	$('#button-'+view).addClass('selected');
+	for ( var v in views) {
+		rotateButton($('#button-' + views[v]), 0);
+		$('#button-' + views[v]).removeClass('button-selected');
+	}
+	$('#button-'+view).addClass('button-selected');
 	if(infinitelistloadingsettings.view==view){
 		//invert sorting
 		infinitelistloadingsettings.descending=!infinitelistloadingsettings.descending;
@@ -37,10 +38,15 @@ function handleListChange(view){
 }
 
 function rotateButton(button, deg){
-	button.css('-moz-transform', 'rotate('+deg+'deg)');
-	button.css('-webkit-transform', 'rotate('+deg+'deg)');
-	button.css('-o-transform', 'rotate('+deg+'deg)');;
-	button.css('transform', 'rotate('+deg+'deg)');
+	var scale ="";
+	if(deg!=0){
+		scale = "scale(1.25, 1.25)";
+	}
+	button.css('-moz-transform', scale + ' rotate('+deg+'deg)');
+	button.css('-webkit-transform', scale +' rotate('+deg+'deg)');
+	button.css('-o-transform', scale + ' rotate('+deg+'deg)');;
+	button.css('transform', scale + ' rotate('+deg+'deg)');
+	button.css('transform', scale + ' rotate('+deg+'deg)');
 }
 
 /**
@@ -81,7 +87,7 @@ function loadInfiniteListItems() {
 					$("#infinitecollectionlist").append(list);
 				}
 				infinitelistloadingsettings.loadCounter++;
-				$(".fancybox").fancybox();
+				//$(".fancybox").fancybox();
 				INFINITELISTLOADINGMUTEX.locked = false;
 				hideLoading();
 			},
@@ -111,7 +117,7 @@ function checkPostLoadInfiniteList() {
 	// I am the scroll buffer; this is the amount of
 	// pre-bottom space we want to take into account
 	// before we start loading the next items.
-	var scrollBuffer = 0;
+	var scrollBuffer = 100;
 
 	// Check to see if the container bottom is close
 	// enought (with buffer) to the scroll of the
@@ -136,5 +142,5 @@ Mark.pipes.replace = function (str, n, m) {
 };
 
 $(document).ready(function() {
-	handleListChange('listcollectionnumber');
+	handleListChange(views[0]);
 });

@@ -72,6 +72,24 @@ function hideLoading(){
 	$.unblockUI();
 }
 
+var jsonDetails;
+function openDetails(id){
+	console.log("opening " + path[1]+"/"+id);
+	$.getJSON("/" + path[1] + "/" + id, function (json) {
+		jsonDetails=json;
+	    $.get("templates/details.html", function (txt) {
+	    	var content = Mark.up(txt, jsonDetails);
+	    	$.fancybox.open(content, {
+	    		scrolling: "no"
+	    	});
+	    }, "html");
+	});
+}
+
+function flipCover(divId, dvdId){
+//	$('#'+id).css('-webkit-transform', 'rotateY(180deg)');
+}
+
 $(document).ready(function() {
 	db.view(design + "/overview", {
 		reduce : true,

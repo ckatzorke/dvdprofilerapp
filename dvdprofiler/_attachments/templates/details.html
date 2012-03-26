@@ -1,0 +1,23 @@
+<div style="width:900px;height:800px;">
+	<div id="cover_container">
+		<div id="cover_details" class="shadow">
+			<div class="front face">
+				<img width="465" height="664" src="/dvdprofiler/{{_id}}/cover_f" onerror="this.src='images/nocover.gif';" />
+			</div>
+			<div class="back face center">
+				<img width="465" height="664" src="/dvdprofiler/{{_id}}/cover_b" onerror="this.src='images/nocover.gif';" />			
+			</div>
+	 	</div>
+	</div>
+	<div style="float: left; width: 400px; height: 100%; overflow: auto; padding: 5px;">
+		<h1>{{title}}</h1>
+		<small>{{genres|join>&nbsp;&#124;&nbsp;}}</small><br>
+		<small>Country of origin: {{countryOfOrigin}}</small><br>
+		<small>Purchased on {{purchaseDate}}</small>
+		<br>
+		<div class="detailsoverview">
+		{{overview}}
+		</div>
+	</div>
+</div>
+<!-- /div-->

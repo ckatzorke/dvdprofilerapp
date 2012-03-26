@@ -24,7 +24,7 @@ function createTable() {
 				// you might want to adjust to get the right result
 				
 				/* END CONFIG */
-				$("body").append("<p id='cover'><img src='/dvdprofiler/"+ sId +"/thumbnail_f' alt='url preview' onerror='this.src=\"images/noimage.jpg\";this.height=\"81\"; this.width=\"67\"'/></p>");								 
+				$("body").append("<p id='cover'><img src='/dvdprofiler/"+ sId +"/thumbnail_f' alt='url preview' onerror='this.src=\"images/nocover.gif\";this.height=\"81\"; this.width=\"67\"'/></p>");								 
 				$("#cover")
 					.css("top",(e.pageY - xOffset) + "px")
 					.css("left",(e.pageX + yOffset) + "px")
