@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>couch.dvdprofiler</title>
+    <link rel="stylesheet" href="style/main.css" type="text/css">
+  </head>
+  <body>
+  	<div id="wrapper">
+		<div id="header" onclick="doHelpMessage($('#helpcouchappmessage'));">couch.dvdprofiler</div>
+	  	<div class="clearfix">&nbsp;</div>
+	  	<div style="float:left"><a href="index.html">Home</a> | <a href="thumbnail.html">Thumbnail-Gallery</a> | <a href="genres.html">Genres</a> | <a href="table.html">Table</a></div>
+	  	<div id="overviewcontainer">
+	  	</div>
+	  	<div id="upload" method="post">
+	  		<form id="uploadcollection" method="put">
+	  			Date <input type="text" name="date"><br>
+	  			Rev <input type="text" name="_rev"/><br>
+	  			<input type="file" name="_attachments"><input type="submit">
+	  		</form>
+	  	</div>
+	  	<div id="saved" style="display:none">Saved</div>
+  	</div>
+  	<div id="helpcouchappmessage" style="display:none; cursor: default">
+ 		<p><strong>About couch.dvdprofiler</strong></p>
+		<p>
+			<br>All data is provided by <a href="http://www.invelos.com/">invelos
+				DVDProfiler</a> a totally awesome client application to manage your
+			dvd collection. <br> Nevertheless, the online list provided by
+			invelos is <a
+				href="http://www.invelos.com/dvdcollection.aspx/Yubitsume">pretty
+				low level</a>. Although there is a project for php (<a
+				href="http://www.phpmyprofiler.de/">phpMyProfiler</a>), it also
+			lacks of UI gimmicks and possibilities to extend the application.<br>
+			The idea for DVDProfiler CouchApp was born out of curiosity to
+			learn couchDB, so this showcase application was developed.
+		</p>
+		<p>Credits</p>
+ 			<ul>
+ 				<li><a href="http://www.bennadel.com/blog/1801-Creating-An-Infinite-Scroll-Effect-With-jQuery-And-ColdFusion.htm">http://www.bennadel.com/blog/1801-Creating-An-Infinite-Scroll-Effect-With-jQuery-And-ColdFusion.htm</a></li>
+ 				<li><a href="https://github.com/adammark/Markup.js/tree/">Markup js</a></li>
+ 				<li><a href="http://jquery.malsup.com/block/">blockUI</a></li>
+ 				<li><a href="http://fancybox.net/">fancybox</a></li>
+ 				<li><a href="http://datatables.net/">DataTables</a></li>
+ 				<li><a href="http://caroufredsel.frebsite.nl/">carouFredSel</a></li>
+ 			</ul>
+	    <div style="text-align: center"><button onclick="$.unblockUI()">OK</button></div>
+	</div>
+  </body>
+  
+	<!--  built in libraries -->
+<!-- 	<script type="text/javascript" src="/_utils/script/sha1.js"></script> -->
+	<script type="text/javascript" src="vendor/couchapp/jquery-1.7.1.min.js"></script>
+	<script type="text/javascript" src="vendor/couchapp/json2.js"></script>
+	<script type="text/javascript" src="vendor/couchapp/jquery.couch.js"></script>
+	<script type="text/javascript" src="vendor/couchapp/jquery.couchLogin.js"></script>
+	<script type="text/javascript" src="vendor/couchapp/jquery.couchProfile.js"></script>
+	<script type="text/javascript" src="vendor/couchapp/md5.js"></script>
+	<script type="text/javascript" src="vendor/couchapp/markup.min.js"></script>
+	
+	<!-- third party, jQuery plugins -->
+	<script type="text/javascript" src="script/plugins/jquery.blockUI.js"></script>
+	<script type="text/javascript" src="script/plugins/jquery.form.js"></script>
+
+
+	<!-- mustache -->
+	<script id="template-overview" type="text/template" charset="utf-8">
+		{{rows}}
+			{{value}}&nbsp;<img src="images/logo/{{key}}.jpg" height="12px">&nbsp;
+		{{/rows}}
+	</script>
+	<!-- application sripts -->
+	<script src="script/app.js"></script>
+	<script src="script/overview.js"></script>
+	<script src="script/upload.js"></script>
+
+</html>
