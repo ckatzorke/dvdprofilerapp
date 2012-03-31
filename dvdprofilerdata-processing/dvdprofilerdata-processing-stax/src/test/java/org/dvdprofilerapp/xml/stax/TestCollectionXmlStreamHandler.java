@@ -24,7 +24,7 @@ public class TestCollectionXmlStreamHandler {
 		collectionXmlStreamHandler.addDVDEventListener(dvdCounter);
 		collectionXmlStreamHandler.addDVDEventListener(dvdSysout);
 		collectionXmlStreamHandler.process();
-		Assert.assertEquals(3, dvdCounter.getCounter());
+		Assert.assertEquals(2, dvdCounter.getCounter());
 	}
 
 }

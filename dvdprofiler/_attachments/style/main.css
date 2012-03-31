@@ -148,16 +148,14 @@ a,a:HOVER,a:ACTIVE,a:VISITED {
 .listthumbnail {
 	padding: 3px;
 	vertical-align: top;
-	text-align: center;
-}
-/**flip*/
-.thumbnail {
-	height: 162px;
-	width: 134px;
+	text-align: left;
+	height: 113;
+	width: 100px;
 }
 
-.thumbnail-back {
-	display: none;
+.thumbnail {
+	height: 113;
+	width: 94px;
 }
 
 /**Details*/

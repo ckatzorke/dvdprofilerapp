@@ -49,10 +49,7 @@ public class CollectionXmlStreamProcessor extends AbstractCollectionProcessor {
 				if (eventType == XMLEvent.START_ELEMENT) {
 					context.setCurrentElement(staxReader.getLocalName());
 					if (CollectionProcessor.COLLECTION_ELEMENT_DVD
-							.equals(context.getCurrentElement())
-							&& (CollectionProcessor.COLLECTION_ELEMENT_DVD
-									.equals(context.getPreviousElement()) || CollectionProcessor.COLLECTION_ELEMENT_COLLECTION
-									.equals(context.getPreviousElement()))) {
+							.equals(context.getCurrentElement())) {
 						DVD dvd = new DVD();
 						// process all child elements until end_element DVD is
 						// reached
@@ -187,10 +184,7 @@ public class CollectionXmlStreamProcessor extends AbstractCollectionProcessor {
 										.getLocalName());
 								if (context
 										.getCurrentElement()
-										.equals(CollectionProcessor.COLLECTION_ELEMENT_DVD)
-										&& !context
-												.getPreviousElement()
-												.equals(CollectionProcessor.COLLECTION_ELEMENT_DVD)) {
+										.equals(CollectionProcessor.COLLECTION_ELEMENT_DVD)) {
 									if (dvd.getParentUpc() != null) {
 										// get parent DVD entry
 										DVD parent = dvds.get(dvd

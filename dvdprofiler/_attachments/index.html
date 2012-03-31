@@ -77,7 +77,7 @@
 		{{rows}}
 			<tr >
 				<td rowspan="3" class="listthumbnail infinitelist-{{if #|even}}{{else}}odd{{/if}}">
-					<a id="{{value.id}}" onclick="openDetails(this.id)" href="javascript:;"><img class="thumbnail" src="/dvdprofiler/{{value.id}}/thumbnail_f" onerror="this.src='images/nocover.gif';"  /></a>
+					<a id="{{value.id}}" onclick="openDetails(this.id)" href="javascript:;"><img class="thumbnail" src="/dvdprofiler/{{value.id}}/thumbnail_f" onerror="this.src='images/nocover.gif';" /></a>
 				</td>
 				<td  class="infinitelist-{{if #|even}}{{else}}odd{{/if}}">
 					<strong>{{value.title}}</strong>
@@ -98,13 +98,13 @@
 				</td>
 				<td align="right" class="infinitelist-{{if #|even}}{{else}}odd{{/if}}">
 					{{value.media}}
-						<img src="images/logo/{{.}}.jpg" height="12px">&nbsp;
+						<img src="images/logo/{{.|downcase}}.jpg" height="12px">&nbsp;
 					{{/value.media}}
 				</td>
 			</tr>
 			<tr>
 				<td  colspan="3" class="infinitelist-{{if #|even}}{{else}}odd{{/if}}">
-					<div class="overview">{{value.description}}</div>
+					<div class="overview">tbd: studios, releasedate, originaltitle</div>
 				</td>
 			</tr>
 		{{/rows}}
