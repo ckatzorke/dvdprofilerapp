@@ -1,7 +1,7 @@
 /**
  * Globals
  */
-var views = new Array("listcollectionnumber", "listtitle", "listpurchasedate");
+var views = new Array("listpurchasedate", "listcollectionnumber", "listtitle");
 var INFINITELISTLOADINGMUTEX = {
 	"locked" : false
 };
