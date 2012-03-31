@@ -8,11 +8,12 @@
   	<div id="wrapper">
 		<div id="header" onclick="doHelpMessage($('#helpcouchappmessage'));">couch.dvdprofiler</div>
 	  	<div class="clearfix">&nbsp;</div>
-	  	<div class="clearfix"><a href="index.html">Home</a> | <a href="thumbnail.html">Thumbnail-Gallery</a> | <a href="genres.html">Genres</a> | <a href="table.html">Table</a></div>
-	  	<div id="genrescontainer">
-		    <div id="genresgallery">
-		    </div>
-	  	</div>
+	  	<div style="float:left"><a href="index.html">Home</a> | <a href="table.html">Table</a> | <a href="statistics.html">Statistics</a> | <a href="playground.html">Playground</a></div>
+		<div>
+			<ul>
+				<li><a href="thumbnail.html">Thumbnail-Gallery</a></li>
+			</ul>
+		</div>
   	</div>
   	<div id="helpcouchappmessage" style="display:none; cursor: default">
  		<p><strong>About couch.dvdprofiler</strong></p>
@@ -53,20 +54,10 @@
 	
 	<!-- third party, jQuery plugins -->
 	<script type="text/javascript" src="script/plugins/jquery.blockUI.js"></script>
-	<script type="text/javascript" src="script/plugins/mobilynotes.js"></script>
+	<script type="text/javascript" src="script/plugins/jquery.fancybox.pack.js"></script>
 
-
-	<!-- mustache -->
-	<script id="template-genres" type="text/template" charset="utf-8">
-		{{rows}}
-		<div class="genre">
-			<a href="">{{key}} ({{value}})</a>
-		</div>
-		{{/rows}}
-	</script>
 
 	<!-- application sripts -->
 	<script src="script/app.js"></script>
-	<script src="script/genres.js"></script>
 
 </html>

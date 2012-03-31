@@ -3,25 +3,24 @@
   <head>
     <title>couch.dvdprofiler</title>
     <link rel="stylesheet" href="style/main.css" type="text/css">
-    <link rel="stylesheet" href="style/thumbnailgallery.caroufredsel.css" type="text/css">
   </head>
   <body>
   	<div id="wrapper">
 		<div id="header" onclick="doHelpMessage($('#helpcouchappmessage'));">couch.dvdprofiler</div>
 	  	<div class="clearfix">&nbsp;</div>
-	  	<div style="float:left"><a href="index.html">Home</a> | <a href="table.html">Table</a> | <a href="statistics.html">Statistics</a> | <a href="playground.html">Playground</a></div>
-	  	<div id="overviewcontainer">
-	  	</div>
-	  	<div id="thumbnailgallerycontainer">
-		    <div id="thumbnailgallery" class="image_carousel">
-				<div id="carousel-thumbnailgallery" >
-				</div>
-				<div class="clearfix"></div>
+	  	<div class="clearfix"><a href="index.html">Home</a> | <a href="thumbnail.html">Thumbnail-Gallery</a> | <a href="genres.html">Genres</a> | <a href="table.html">Table</a></div>
+	  	<div id="staticticscontainer">
+	  		<select id="statistic" onchange="updateStatistic()">
+	  			<option value="createGenresStatistic()">Genres</option>
+	  			<option value="createCountriesStatistic()">Countries</option>
+	  		</select>
+	  		<!-- this container can be used by the statistic-plugins -->
+		    <div id="statistics" style="min-width: 400px; height: 400px; margin: 0 auto">
 		    </div>
 	  	</div>
   	</div>
   	<div id="helpcouchappmessage" style="display:none; cursor: default">
- 		<p><strong>Aboutcouch.dvdprofiler</strong></p>
+ 		<p><strong>About couch.dvdprofiler</strong></p>
 		<p>
 			<br>All data is provided by <a href="http://www.invelos.com/">invelos
 				DVDProfiler</a> a totally awesome client application to manage your
@@ -58,25 +57,16 @@
 	<script type="text/javascript" src="vendor/couchapp/markup.min.js"></script>
 	
 	<!-- third party, jQuery plugins -->
-	<script type="text/javascript" src="script/plugins/jquery.carouFredSel-5.4.1-packed.js"></script>
 	<script type="text/javascript" src="script/plugins/jquery.blockUI.js"></script>
+	
+	<!-- highcharts -->
+	<script type="text/javascript" src="script/highcharts/highcharts.js"></script>
 
-
-	<!-- mustache -->
-	<script id="template-overview" type="text/template" charset="utf-8">
-		{{rows}}
-			{{value}}&nbsp;<img src="images/logo/{{key}}.jpg" height="12px">&nbsp;
-		{{/rows}}
-	</script>
-	<script id="template-thumbnailgallery" type="text/template" charset="utf-8">
-		{{rows}}
-			<img src="images/empty.png" original="/dvdprofiler/{{id}}/thumbnail_f" height="81" width="67" title="{{value}}, purchased on {{key}}" alt="{{value}}, purchased on {{key}}" onerror="this.src='images/nocover.gif';/*$(this).after($('<div>{{value}}</div>').addClass('thumbnailoverlay'))*/">
-		{{/rows}}
-	</script>
 
 	<!-- application sripts -->
 	<script src="script/app.js"></script>
-	<script src="script/overview.js"></script>
-	<script src="script/thumbnailgallery.js"></script>
+	<script src="script/statistics.js"></script>
+	<script src="script/statistics-genres.js"></script>
+	<script src="script/statistics-countries.js"></script>
 
 </html>
