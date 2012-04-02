@@ -1,6 +1,5 @@
-function createGenresStatistic() {
+$.fn.statistics('register', 'Genres', function () {
 	var genres = new Array();
-	showLoading();
 	db.view(design + "/genrestatistic", {
 		group : "true",
 		success : function(data) {
@@ -55,8 +54,7 @@ function createGenresStatistic() {
 					}, [ 'Safari', 8.5 ], [ 'Opera', 6.2 ], [ 'Others', 0.7 ] ]*/
 				} ]
 			});
-			hideLoading();
 		}
 	});
-};
+});
 

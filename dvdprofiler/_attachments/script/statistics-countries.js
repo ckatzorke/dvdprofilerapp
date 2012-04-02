@@ -1,6 +1,5 @@
-var genres = new Array();
-function createCountriesStatistic() {
-	showLoading();
+$.fn.statistics('register', 'Countries', function () {
+	var genres = new Array();
 	db.view(design + "/countrystatistic", {
 		group : "true",
 		success : function(data) {
@@ -55,8 +54,7 @@ function createCountriesStatistic() {
 					}, [ 'Safari', 8.5 ], [ 'Opera', 6.2 ], [ 'Others', 0.7 ] ]*/
 				} ]
 			});
-			hideLoading();
 		}
 	});
-};
+});
 
