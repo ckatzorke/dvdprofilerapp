@@ -27,8 +27,9 @@
 		show : function(statistic) {
 			console.log('show(' + statistic + ')');
 			$('#statistics').hide();
+			$('#statistics').html("");
 			showLoading();
-			$stats[statistic].call();
+			$stats[statistic]($('#statistics'));
 			hideLoading();
 			$('#statistics').fadeIn();
 		},

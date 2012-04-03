@@ -2,12 +2,14 @@ function createOverview() {
 	db.view(design + "/media", {
 		group : "true",
 		success : function(data) {
-			var overview = Mark.up($("#template-overview").html(), data);
-			$("#overviewcontainer").html(overview);
+			$.get("templates/overview.html", function(txt) {
+				var overview = Mark.up(txt, data);
+				$("#overviewcontainer").html(overview);
+			}, "html");
+
 		}
 	});
 };
-
 
 $(document).ready(function() {
 	createOverview();
