@@ -71,35 +71,47 @@
 		<table class="infinitecollectiontable">
 		{{rows}}
 			<tr >
-				<td rowspan="3" class="listthumbnail infinitelist-{{if #|even}}{{else}}odd{{/if}}">
+				<td rowspan="3" class="listthumbnail infinitelist-{{if #|even}}even{{else}}odd{{/if}}">
 					<a id="{{value.id}}" onclick="openDetails(this.id)" href="javascript:;"><img class="thumbnail" src="/dvdprofiler/{{value.id}}/thumbnail_f" onerror="this.src='images/nocover.gif';" /></a>
 				</td>
-				<td  class="infinitelist-{{if #|even}}{{else}}odd{{/if}}">
-					<strong>{{value.title}}</strong>
+				<td  class="infinitelist-{{if #|even}}even{{else}}odd{{/if}}">
+					<strong>{{value.title}}</strong> {{if value.originalTitle|notempty}} ({{value.originalTitle}}){{/if}}
 				</td>
-				<td  class="infinitelist-{{if #|even}}{{else}}odd{{/if}}">
-					{{value.country}}
+				<td  class="infinitelist-{{if #|even}}even{{else}}odd{{/if}}">
+					{{value.country}} ({{value.productionYear}})
 				</td>
-				<td align="right"  class="infinitelist-{{if #|even}}{{else}}odd{{/if}}">
+				<td align="right"  class="infinitelist-{{if #|even}}even{{else}}odd{{/if}}">
 					<strong>#{{value.collectionNumber}}</strong>
 				</td>
 			</tr>
 			<tr>
-				<td class="infinitelist-{{if #|even}}{{else}}odd{{/if}}">
+				<td class="infinitelist-{{if #|even}}even{{else}}odd{{/if}}">
 					<small>{{value.genres|join>&nbsp;&#124;&nbsp;}}</small><br/>
 				</td>
-				<td class="infinitelist-{{if #|even}}{{else}}odd{{/if}}">
-					<small>Purchased on {{value.purchaseDate}} 
+				<td class="infinitelist-{{if #|even}}even{{else}}odd{{/if}}">
+					<small>Released on {{value.releaseDate}}</small><br>
 				</td>
-				<td align="right" class="infinitelist-{{if #|even}}{{else}}odd{{/if}}">
+				<td align="right" class="infinitelist-{{if #|even}}even{{else}}odd{{/if}}">
 					{{value.media}}
 						<img src="images/logo/{{.|downcase}}.jpg" height="12px">&nbsp;
 					{{/value.media}}
 				</td>
 			</tr>
 			<tr>
-				<td  colspan="3" class="infinitelist-{{if #|even}}{{else}}odd{{/if}}">
-					<div class="overview">tbd: studios, releasedate, originaltitle</div>
+				<td class="infinitelist-{{if #|even}}even{{else}}odd{{/if}}">
+					tbd: actors (already in doc), credits, events, loaninfo<
+				</td>
+				<td class="infinitelist-{{if #|even}}even{{else}}odd{{/if}}">
+					<small>Purchased on {{value.purchaseDate}} </small>
+				</td>
+				<td align="right" class="infinitelist-{{if #|even}}even{{else}}odd{{/if}}">
+					<small>
+					<ul>
+						{{value.studios}}
+							<li>{{.}}</li>
+						{{/value.studios}}
+					</ul>
+					</small>
 				</td>
 			</tr>
 		{{/rows}}

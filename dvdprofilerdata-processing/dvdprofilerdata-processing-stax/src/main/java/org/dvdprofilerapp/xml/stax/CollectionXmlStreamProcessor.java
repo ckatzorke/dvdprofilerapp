@@ -1,6 +1,7 @@
 package org.dvdprofilerapp.xml.stax;
 
 import java.io.IOException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -13,11 +14,13 @@ import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 import javax.xml.stream.events.XMLEvent;
 
+import org.dvdprofilerapp.model.Actor;
 import org.dvdprofilerapp.model.DVD;
 import org.dvdprofilerapp.model.MediaType;
 import org.dvdprofilerapp.xml.AbstractCollectionProcessor;
 import org.dvdprofilerapp.xml.CollectionProcessor;
 import org.springframework.core.io.Resource;
+import org.springframework.util.ReflectionUtils;
 import org.springframework.util.StringUtils;
 
 public class CollectionXmlStreamProcessor extends AbstractCollectionProcessor {
@@ -88,10 +91,45 @@ public class CollectionXmlStreamProcessor extends AbstractCollectionProcessor {
 										dvd.setPurchaseDate(purchaseDate);
 									}
 								}
+								if (CollectionProcessor.COLLECTION_ELEMENT_RELEASE_DATE
+										.equals(context.getCurrentElement())) {
+									String releaseDate = getElementTextValue(staxReader);
+									if (StringUtils.hasText(releaseDate)) {
+										dvd.setReleaseDate(releaseDate);
+									}
+								}
 								if (CollectionProcessor.COLLECTION_ELEMENT_TITLE
 										.equals(context.getCurrentElement())) {
 									String title = getElementTextValue(staxReader);
 									dvd.setTitle(title);
+								}
+								if (CollectionProcessor.COLLECTION_ELEMENT_ORIGINAL_TITLE
+										.equals(context.getCurrentElement())) {
+									String originalTitle = getElementTextValue(staxReader);
+									if (StringUtils.hasText(originalTitle)) {
+										dvd.setOriginalTitle(originalTitle);
+									}
+								}
+								if (CollectionProcessor.COLLECTION_ELEMENT_PRODUCTION_YEAR
+										.equals(context.getCurrentElement())) {
+									String year = getElementTextValue(staxReader);
+									if (StringUtils.hasText(year)) {
+										dvd.setProductionYear(year);
+									}
+								}
+								if (CollectionProcessor.COLLECTION_ELEMENT_RATING
+										.equals(context.getCurrentElement())) {
+									String rating = getElementTextValue(staxReader);
+									if (StringUtils.hasText(rating)) {
+										dvd.setRating(rating);
+									}
+								}
+								if (CollectionProcessor.COLLECTION_ELEMENT_RATING_AGE
+										.equals(context.getCurrentElement())) {
+									String ratingAge = getElementTextValue(staxReader);
+									if (StringUtils.hasText(ratingAge)) {
+										dvd.setRatingAge(ratingAge);
+									}
 								}
 								if (CollectionProcessor.COLLECTION_ELEMENT_COLLECTIONNUMBER
 										.equals(context.getCurrentElement())) {
@@ -160,6 +198,72 @@ public class CollectionXmlStreamProcessor extends AbstractCollectionProcessor {
 																.getLocalName())) {
 											dvd.setGenres(genres
 													.toArray(new String[genres
+															.size()]));
+											break;
+										}
+									}
+								}
+								if (CollectionProcessor.COLLECTION_ELEMENT_ACTORS
+										.equals(staxReader.getLocalName())) {
+									List<Actor> actors = new ArrayList<Actor>();
+									Actor actor = null;
+									while (true) {
+										eventType = staxReader.next();
+										if (eventType == XMLEvent.START_ELEMENT
+												&& CollectionProcessor.COLLECTION_ELEMENT_ACTOR
+														.equals(staxReader
+																.getLocalName())) {
+											actor = new Actor();
+											for (int i = 0;i<staxReader.getAttributeCount();i++){
+												String attrName = staxReader.getAttributeLocalName(i);
+												String attrValue = staxReader.getAttributeValue(i);
+												try {
+													Method method = actor
+															.getClass()
+															.getMethod(
+																	"set"
+																			+ attrName,
+																			String.class);
+													ReflectionUtils.invokeMethod(
+															method, actor,
+															attrValue);
+												} catch (Exception e) {
+													// nothing
+												}
+											}
+										}
+										if (eventType == XMLEvent.END_ELEMENT
+												&& CollectionProcessor.COLLECTION_ELEMENT_ACTOR
+														.equals(staxReader
+																.getLocalName())) {
+											actors.add(actor);
+											actor = null;
+										}
+										if (eventType == XMLEvent.END_ELEMENT
+												&& CollectionProcessor.COLLECTION_ELEMENT_ACTORS
+														.equals(staxReader
+																.getLocalName())) {
+											dvd.setActors(actors
+													.toArray(new Actor[actors
+															.size()]));
+											break;
+										}
+									}
+								}
+								if (CollectionProcessor.COLLECTION_ELEMENT_STUDIOS
+										.equals(staxReader.getLocalName())) {
+									List<String> studios = new ArrayList<String>();
+									while (true) {
+										eventType = staxReader.next();
+										if (eventType == XMLEvent.START_ELEMENT) {
+											studios.add(getElementTextValue(staxReader));
+										}
+										if (eventType == XMLEvent.END_ELEMENT
+												&& CollectionProcessor.COLLECTION_ELEMENT_STUDIOS
+														.equals(staxReader
+																.getLocalName())) {
+											dvd.setStudios(studios
+													.toArray(new String[studios
 															.size()]));
 											break;
 										}

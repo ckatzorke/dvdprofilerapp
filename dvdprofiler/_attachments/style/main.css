@@ -124,10 +124,12 @@ a,a:HOVER,a:ACTIVE,a:VISITED {
 
 .infinitelist-odd {
 	background-color: #F4F2F7;
+	vertical-align: top;
 }
 
 .infinitelist-even {
 	background-color: #FFFFFF;
+	vertical-align: top;
 }
 
 .overview {

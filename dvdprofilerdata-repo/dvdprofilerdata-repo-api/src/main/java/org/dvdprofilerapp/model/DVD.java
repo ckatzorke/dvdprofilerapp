@@ -9,12 +9,20 @@ public class DVD {
 	private String profileTimeStamp;
 	private String parentUpc;
 	private String title;
+	private String originalTitle;
 	private String overview;
 	private MediaType[] mediaType;
 	private int collectionNumber;
 	private String countryOfOrigin;
 	private String[] genres;
+	private String[] studios;
 	private String purchaseDate;
+	private String releaseDate;
+	private String productionYear;
+	private String rating;
+	private String ratingAge;
+	private Actor[] actors;
+	
 	private DVD[] childProfiles;
 
 	public String getId() {
@@ -113,15 +121,77 @@ public class DVD {
 		this.childProfiles = childProfiles;
 	}
 
+	public String[] getStudios() {
+		return studios;
+	}
+
+	public void setStudios(String[] studios) {
+		this.studios = studios;
+	}
+
+	public String getReleaseDate() {
+		return releaseDate;
+	}
+
+	public void setReleaseDate(String releaseDate) {
+		this.releaseDate = releaseDate;
+	}
+
+	public String getOriginalTitle() {
+		return originalTitle;
+	}
+
+	public void setOriginalTitle(String originalTitle) {
+		this.originalTitle = originalTitle;
+	}
+
+	public String getProductionYear() {
+		return productionYear;
+	}
+
+	public void setProductionYear(String productionYear) {
+		this.productionYear = productionYear;
+	}
+
+	public String getRating() {
+		return rating;
+	}
+
+	public void setRating(String rating) {
+		this.rating = rating;
+	}
+
+	public String getRatingAge() {
+		return ratingAge;
+	}
+
+	public void setRatingAge(String ratingAge) {
+		this.ratingAge = ratingAge;
+	}
+
+	public Actor[] getActors() {
+		return actors;
+	}
+
+	public void setActors(Actor[] actors) {
+		this.actors = actors;
+	}
+
 	@Override
 	public String toString() {
 		return "DVD [id=" + id + ", upc=" + upc + ", profileTimeStamp="
 				+ profileTimeStamp + ", parentUpc=" + parentUpc + ", title="
-				+ title + ", overview=" + overview + ", mediaType="
-				+ Arrays.toString(mediaType) + ", collectionNumber="
-				+ collectionNumber + ", countryOfOrigin=" + countryOfOrigin
-				+ ", genres=" + Arrays.toString(genres) + ", purchaseDate="
-				+ purchaseDate + "]";
+				+ title + ", originalTitle=" + originalTitle + ", overview="
+				+ overview + ", mediaType=" + Arrays.toString(mediaType)
+				+ ", collectionNumber=" + collectionNumber
+				+ ", countryOfOrigin=" + countryOfOrigin + ", genres="
+				+ Arrays.toString(genres) + ", studios="
+				+ Arrays.toString(studios) + ", purchaseDate=" + purchaseDate
+				+ ", releaseDate=" + releaseDate + ", productionYear="
+				+ productionYear + ", rating=" + rating + ", ratingAge="
+				+ ratingAge + ", actors=" + Arrays.toString(actors)
+				+ ", childProfiles=" + Arrays.toString(childProfiles) + "]";
 	}
+
 
 }

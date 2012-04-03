@@ -24,6 +24,8 @@ public class DvdProfilerRepositoryEktorpImpl implements DvdProfilerRepository {
 	private String dvdprofilerDBDirectory;
 	private Boolean attach;
 
+	private boolean forceUpdate = false;
+
 	private enum ThumbnailType {
 		f, b
 	}
@@ -40,6 +42,14 @@ public class DvdProfilerRepositoryEktorpImpl implements DvdProfilerRepository {
 		this.repo = repo;
 	}
 
+	public boolean isForceUpdate() {
+		return forceUpdate;
+	}
+
+	public void setForceUpdate(boolean forceUpdate) {
+		this.forceUpdate = forceUpdate;
+	}
+
 	@Override
 	public String writeDvd(DVD dvd) {
 		CouchDVD couchDVD = null;
@@ -51,22 +61,25 @@ public class DvdProfilerRepositoryEktorpImpl implements DvdProfilerRepository {
 			couchDVD = new CouchDVD();
 		}
 		boolean update = true;
-		if (couchDVD.getProfileTimeStamp() != null) {
-			// compare profilertimestamps
-			ProfilerTimeStampCompare compare = new ProfilerTimeStampCompare(
-					couchDVD.getProfileTimeStamp(), dvd.getProfileTimeStamp());
-			if (compare.isUpdated()) {
-				logger.info("DVD " + dvd.getTitle() + " (" + dvd.getId()
-						+ ") updated.");
-				update = true;
+		if (!forceUpdate) {
+			if (couchDVD.getProfileTimeStamp() != null) {
+				// compare profilertimestamps
+				ProfilerTimeStampCompare compare = new ProfilerTimeStampCompare(
+						couchDVD.getProfileTimeStamp(),
+						dvd.getProfileTimeStamp());
+				if (compare.isUpdated()) {
+					logger.info("DVD " + dvd.getTitle() + " (" + dvd.getId()
+							+ ") updated.");
+					update = true;
+				} else {
+					logger.finest("DVD " + dvd.getTitle() + " (" + dvd.getId()
+							+ ") not updated. Skipping...");
+					update = false;
+				}
 			} else {
-				logger.finest("DVD " + dvd.getTitle() + " (" + dvd.getId()
-						+ ") not updated. Skipping...");
-				update = false;
+				logger.info("Creating dvd entity " + dvd.getTitle() + " ("
+						+ dvd.getId() + ")");
 			}
-		} else {
-			logger.info("Creating dvd entity " + dvd.getTitle() + " ("
-					+ dvd.getId() + ")");
 		}
 		if (update) {
 			BeanUtils.copyProperties(dvd, couchDVD);
@@ -97,8 +110,8 @@ public class DvdProfilerRepositoryEktorpImpl implements DvdProfilerRepository {
 			if (attachEnabled()) {
 				attachThumbnail(couchDVD, ThumbnailType.f);
 				attachThumbnail(couchDVD, ThumbnailType.b);
-				 attachCover(couchDVD, CoverType.f);
-				 attachCover(couchDVD, CoverType.b);
+				attachCover(couchDVD, CoverType.f);
+				attachCover(couchDVD, CoverType.b);
 			}
 		}
 		return null;
