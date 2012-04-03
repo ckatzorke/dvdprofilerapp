@@ -80,7 +80,7 @@
 				<td  class="infinitelist-{{if #|even}}even{{else}}odd{{/if}}">
 					{{value.country}} ({{value.productionYear}})
 				</td>
-				<td align="right"  class="infinitelist-{{if #|even}}even{{else}}odd{{/if}}">
+				<td class="infinitelist-{{if #|even}}even{{else}}odd{{/if}} infinitelist-right">
 					<strong>#{{value.collectionNumber}}</strong>
 				</td>
 			</tr>
@@ -89,7 +89,7 @@
 					<small>{{value.genres|join>&nbsp;&#124;&nbsp;}}</small><br/>
 				</td>
 				<td class="infinitelist-{{if #|even}}even{{else}}odd{{/if}}">
-					<small>Released on {{value.releaseDate}}</small><br>
+					<small>Released: {{value.releaseDate}}</small><br>
 				</td>
 				<td align="right" class="infinitelist-{{if #|even}}even{{else}}odd{{/if}}">
 					{{value.media}}
@@ -102,15 +102,13 @@
 					tbd: actors (already in doc), credits, events, loaninfo<
 				</td>
 				<td class="infinitelist-{{if #|even}}even{{else}}odd{{/if}}">
-					<small>Purchased on {{value.purchaseDate}} </small>
+					<small>Purchased: {{value.purchaseDate}} </small>
 				</td>
 				<td align="right" class="infinitelist-{{if #|even}}even{{else}}odd{{/if}}">
 					<small>
-					<ul>
 						{{value.studios}}
-							<li>{{.}}</li>
+							{{.}}<br>
 						{{/value.studios}}
-					</ul>
 					</small>
 				</td>
 			</tr>

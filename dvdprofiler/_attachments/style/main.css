@@ -121,7 +121,12 @@ a,a:HOVER,a:ACTIVE,a:VISITED {
 #infinitecollectionlist {
 	padding: 5px;
 }
-
+.infinitelist-right{
+	text-align: right;
+}
+.infinitelist-middle{
+	text-align: left;
+}
 .infinitelist-odd {
 	background-color: #F4F2F7;
 	vertical-align: top;
