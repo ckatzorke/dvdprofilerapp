@@ -44,13 +44,19 @@ $.fn.statistics('register', 'Countries', function (statisticcontainer) {
 				},
 				tooltip : {
 					formatter : function() {
-						var ret = '<span><b>' + this.point.name + '</b>: '
-								+ (Math.round(this.percentage*100)/100)  + ' %</span>';
+						if(this.point.name.substring(0, 3) == "N/A" || this.point.name.substring(0, 3) == "unk" || this.point.name.substring(0,3)=="Oth"){
+							var image = ""; 
+						}else{
+							var image = '<img src="images/flags/'+this.point.name.substring(0, this.point.name.lastIndexOf(' (')).replace(" ", "_").toLowerCase() + '.png">';
+						}
+						var ret = '<span>' + image + ' ' + this.point.y + ' entries&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>';
 						if(this.point.drilldown){
 							ret+="<br><small>Click for details...</small>";
 						}
 						return ret;
-					}
+					},
+					useHTML: true
+					
 				},
 				plotOptions : {
 					pie : {
@@ -74,6 +80,7 @@ $.fn.statistics('register', 'Countries', function (statisticcontainer) {
 							enabled : true,
 							color : '#000000',
 							connectorColor : '#000000',
+							
 							formatter : function() {
 								return '<span><b>' + this.point.name + '</b>: '
 										+ (Math.round(this.percentage*100)/100) + ' %</span>';

@@ -78,7 +78,7 @@
 					<strong>{{value.title}}</strong> {{if value.originalTitle|notempty}} ({{value.originalTitle}}){{/if}}
 				</td>
 				<td  class="infinitelist-{{if #|even}}even{{else}}odd{{/if}}">
-					{{value.country}} ({{value.productionYear}})
+					{{if value.country|notempty}}<img valign="absmiddle" src="images/flags/{{value.country|downcase|replace> >_}}.png">&nbsp;{{value.country}}{{else}}n/a{{/if}} ({{value.productionYear}})
 				</td>
 				<td class="infinitelist-{{if #|even}}even{{else}}odd{{/if}} infinitelist-right">
 					<strong>#{{value.collectionNumber}}</strong>

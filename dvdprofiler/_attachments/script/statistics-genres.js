@@ -29,6 +29,7 @@ $.fn.statistics('register', 'Genres', function (statisticcontainer) {
 				}
 			});
 			//push other
+			other.name+=" (" + other.y + ")";
 			pieData.push(other);
 			chart = new Highcharts.Chart({
 				chart : {
@@ -45,8 +46,7 @@ $.fn.statistics('register', 'Genres', function (statisticcontainer) {
 				},
 				tooltip : {
 					formatter : function() {
-						var ret = '<span><b>' + this.point.name + '</b>: '
-								+ (Math.round(this.percentage*100)/100)  + ' %</span>';
+						var ret = '<span>'	+ (Math.round(this.percentage*100)/100)  + ' %</span>';
 						if(this.point.drilldown){
 							ret+="<br><small>Click for details...</small>";
 						}
@@ -76,8 +76,7 @@ $.fn.statistics('register', 'Genres', function (statisticcontainer) {
 							color : '#000000',
 							connectorColor : '#000000',
 							formatter : function() {
-								return '<span><b>' + this.point.name + '</b>: '
-										+ (Math.round(this.percentage*100)/100) + ' %</span>';
+								return '<span><b>' + this.point.name + '</b>';
 							}
 						}
 					}

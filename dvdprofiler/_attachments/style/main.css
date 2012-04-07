@@ -144,7 +144,7 @@ a,a:HOVER,a:ACTIVE,a:VISITED {
 }
 
 #infinitecollectionlistscrollinfo {
-	width: 100%;
+	width: 90%;
 	height: 20px;
 	border: 1px solid #749BCC;
 	font-style: italic;
