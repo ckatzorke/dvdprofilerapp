@@ -33,6 +33,26 @@ a,a:HOVER,a:ACTIVE,a:VISITED {
 	background-color: #295183;
 }
 
+#search {
+	float: right;
+	text-align: right;
+	vertical-align: middle;
+	padding-right: 50px;
+}
+
+#searchfield {
+	-webkit-border-radius: 15px;
+	border-radius: 12px;
+	border: 1px solid #383C42;
+	padding-left: 22px;
+	padding-right: 20px;
+	background-color: #A2A7B0;
+	background-image: url("find.png");
+	background-position: 5px;
+	background-repeat: no-repeat;
+	color: #EDEDED;
+}
+
 #intro {
 	width: 100%;
 	color: #7A7E82;
@@ -97,17 +117,24 @@ a,a:HOVER,a:ACTIVE,a:VISITED {
 }
 
 .button-selected {
-	background-color: #C3DEFA;
+	background-color: #A2A7B0;
 	font-weight: bold;
+	color: #EDEDED;
 }
 
-#infinitecollectionlistcontainer {
+#listcontainer {
 	width: 100%;
 	float: left;
 }
 
 #infinitecollectionlistsettings {
 	padding-top: 5px;
+	float: left;
+}
+
+#genrefilter {
+	padding-top: 5px;
+	float: right;
 }
 
 .infinitecollectiontable {
@@ -121,12 +148,15 @@ a,a:HOVER,a:ACTIVE,a:VISITED {
 #infinitecollectionlist {
 	padding: 5px;
 }
-.infinitelist-right{
+
+.infinitelist-right {
 	text-align: right;
 }
-.infinitelist-middle{
+
+.infinitelist-middle {
 	text-align: left;
 }
+
 .infinitelist-odd {
 	background-color: #F4F2F7;
 	vertical-align: top;
@@ -135,6 +165,10 @@ a,a:HOVER,a:ACTIVE,a:VISITED {
 .infinitelist-even {
 	background-color: #FFFFFF;
 	vertical-align: top;
+}
+
+#searchresults {
+	
 }
 
 .overview {
@@ -167,6 +201,13 @@ a,a:HOVER,a:ACTIVE,a:VISITED {
 .thumbnail {
 	height: 113;
 	width: 94px;
+}
+
+.castAndCrew {
+	position: relative absolute;
+	float: left;
+	font-family: monospace;
+	padding: 5px;
 }
 
 /**Details*/
@@ -275,4 +316,57 @@ a,a:HOVER,a:ACTIVE,a:VISITED {
 
 td.selected {
 	background-color: #D0F5D9;
+}
+
+/*review*/
+.rating-static {
+	float: right;
+	width: 60px;
+	height: 16px;
+	display: block;
+	background: url('star-rating.png') 0 0 no-repeat;
+}
+
+.rating-50 {
+	background-position: 0 0;
+}
+
+.rating-40 {
+	background-position: -12px 0;
+}
+
+.rating-30 {
+	background-position: -24px 0;
+}
+
+.rating-20 {
+	background-position: -36px 0;
+}
+
+.rating-10 {
+	background-position: -48px 0;
+}
+
+.rating-0 {
+	background-position: -60px 0;
+}
+
+.rating-5 {
+	background-position: -48px -16px;
+}
+
+.rating-15 {
+	background-position: -36px -16px;
+}
+
+.rating-25 {
+	background-position: -24px -16px;
+}
+
+.rating-35 {
+	background-position: -12px -16px;
+}
+
+.rating-45 {
+	background-position: 0 -16px;
 }

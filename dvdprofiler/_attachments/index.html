@@ -5,22 +5,16 @@
     <link rel="stylesheet" href="style/main.css" type="text/css">
     <link rel="stylesheet" href="style/thumbnailgallery.caroufredsel.css" type="text/css">
     <link rel="stylesheet" href="style/jquery.fancybox.css" type="text/css">
+    <link rel="stylesheet" href="style/chosen.css" type="text/css">
   </head>
   <body>
   	<div id="wrapper">
-		<div id="header" onclick="doHelpMessage($('#helpcouchappmessage'));">couch.dvdprofiler</div>
+		<div id="header">couch.dvdprofiler<span id="search"><input id="searchfield" type="text" name="searchbox" placeholder="search..."></span></div>
 	  	<div class="clearfix">&nbsp;</div>
 	  	<div style="float:left"><a href="index.html">Home</a> | <a href="table.html">Table</a> | <a href="statistics.html">Statistics</a> | <a href="playground.html">Playground</a></div>
 	  	<div id="overviewcontainer">
 	  	</div>
-	  	<div id="infinitecollectionlistcontainer">
-	  		<div id="infinitecollectionlistsettings">
-	  			<a href="#" id="button-listpurchasedate" class="button" onclick="handleListChange('listpurchasedate')">Purchase Date</a>&nbsp;
-	  			<a href="#" id="button-listtitle" class="button" onclick="handleListChange('listtitle')">Title</a>&nbsp;
-	  			<a href="#" id="button-listcollectionnumber" class="button" onclick="handleListChange('listcollectionnumber')">Collection #</a>&nbsp;
-	  		</div>
-	  		<div id="infinitecollectionlist"></div>
-	  		<div id="infinitecollectionlistscrollinfo">Loading... <img src="images/loading.gif" height="16" width="16"></div>
+	  	<div id="listcontainer">
 	  	</div>
 
   	</div>
@@ -64,10 +58,31 @@
 	<!-- third party, jQuery plugins -->
 	<script type="text/javascript" src="script/plugins/jquery.blockUI.js"></script>
 	<script type="text/javascript" src="script/plugins/jquery.fancybox.pack.js"></script>
+	<script type="text/javascript" src="script/plugins/chosen.jquery.min.js"></script>
 
 
-	<!-- mustache -->
-	<script id="template-infinitecollectionlist" type="text/template" charset="utf-8">
+	<!-- templates -->
+	<script id="template-infinitelist" type="text/template" charset="utf-8">
+		<div id="infinitecollectionlistsettings">
+	  			<a href="#" id="button-listpurchasedate" class="button" onclick="handleListChange('listpurchasedate')">Purchase Date</a>&nbsp;
+	  			<a href="#" id="button-listtitle" class="button" onclick="handleListChange('listtitle')">Title</a>&nbsp;
+	  			<a href="#" id="button-listcollectionnumber" class="button" onclick="handleListChange('listcollectionnumber')">Collection #</a>&nbsp;
+  		</div>
+		<div id="genrefilter" style="display:none">
+			<select id="genrefilterchosen"  data-placeholder="Choose a genre..." style="width:350px;" multiple class="chzn-select">
+				
+			</select>
+		</div>
+  		<div id="collectionlist"></div>
+  		<div id="infinitecollectionlistscrollinfo">Loading... <img src="images/loading.gif" height="16" width="16"></div>
+	</script>
+	<script id="template-searchresult" type="text/template" charset="utf-8">
+		<div id="searchresults">
+			<h3>{{count}} results for <i>{{searchterm}}</i>&nbsp;&nbsp;&nbsp;<a href="#"  onclick="initInfiniteList();	handleListChange(views[0]);"><img align="baseline" src="style/close.png"></a></h3>
+  		</div>
+  		<div id="searchcollectionlist"></div>
+	</script>
+	<script id="template-collectionlist" type="text/template" charset="utf-8">
 		<table class="infinitecollectiontable">
 		{{rows}}
 			<tr >
@@ -75,10 +90,11 @@
 					<a id="{{value.id}}" onclick="openDetails(this.id)" href="javascript:;"><img class="thumbnail" src="/dvdprofiler/{{value.id}}/thumbnail_f" onerror="this.src='images/nocover.gif';" /></a>
 				</td>
 				<td  class="infinitelist-{{if #|even}}even{{else}}odd{{/if}}">
-					<strong>{{value.title}}</strong> {{if value.originalTitle|notempty}} ({{value.originalTitle}}){{/if}}
+					<strong>{{value.title|highlight}}</strong> {{if value.originalTitle|notempty}} ({{value.originalTitle|highlight}}){{/if}}&nbsp;
+						<span class="rating-static rating-{{value.review|review}}"></span>
 				</td>
 				<td  class="infinitelist-{{if #|even}}even{{else}}odd{{/if}}">
-					{{if value.country|notempty}}<img valign="absmiddle" src="images/flags/{{value.country|downcase|replace> >_}}.png">&nbsp;{{value.country}}{{else}}n/a{{/if}} ({{value.productionYear}})
+					{{if value.country|notempty}}<img valign="absbottom" src="images/flags/{{value.country|downcase|replace> >_}}.png">&nbsp;{{value.country}}{{else}}n/a{{/if}} ({{value.productionYear}})
 				</td>
 				<td class="infinitelist-{{if #|even}}even{{else}}odd{{/if}} infinitelist-right">
 					<strong>#{{value.collectionNumber}}</strong>
@@ -99,7 +115,19 @@
 			</tr>
 			<tr>
 				<td class="infinitelist-{{if #|even}}even{{else}}odd{{/if}}">
-					tbd: actors (already in doc), credits, events, loaninfo<
+					<div id="actors" class="castAndCrew">
+						<center>- Cast -</center>
+						{{value.actors|limit>5}}
+							{{.|castAndCrew>40}}<br>
+						{{/value.actors}}
+					</div>
+					<div id="crew" class="castAndCrew">
+						<center>- Crew -</center>
+						tbd
+					</div>
+					<div class="clearfix">
+						tbd: credits, events, loaninfo
+					</div>
 				</td>
 				<td class="infinitelist-{{if #|even}}even{{else}}odd{{/if}}">
 					<small>Purchased: {{value.purchaseDate}} </small>
@@ -116,7 +144,10 @@
 		</table>
 	</script>
 	
+	
 	<!-- application sripts -->
+	<script src="script/pipes.js"></script>
+	<script src="script/search.js"></script>
 	<script src="script/app.js"></script>
 	<script src="script/overview.js"></script>
 	<script src="script/infinitecollectionlist.js"></script>

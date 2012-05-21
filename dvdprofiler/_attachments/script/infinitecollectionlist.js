@@ -12,41 +12,68 @@ var infinitelistloadingsettings = {
 	"view" : ""
 }
 
-function handleListChange(view){
-	infinitelistloadingsettings.loadCounter=0;
+function initInfiniteList() {
+	highlight = "";
+	$('#listcontainer').block({
+		message : null
+	}).html($('#template-infinitelist').html()).unblock();
+	db.view(design + "/genrestatistic", {
+		group : "true",
+		success : function(data) {
+			var key, value;
+			for ( var i = 0; i < data.rows.length; i++) {
+				key = data.rows[i].key;
+				value = key + " (" + data.rows[i].value + ")";
+				$('#genrefilterchosen').append($('<option>', {
+					value : key
+				}).text(value));
+			}
+			$('.chzn-select').chosen().change(function() {
+				console.log($('#genrefilterchosen').val());
+			});
+			$('#genrefilter').show();
+		}
+	});
+}
+
+function handleListChange(view) {
+	// $('#listcontainer').block({message: null});
+	infinitelistloadingsettings.loadCounter = 0;
 	for ( var v in views) {
 		rotateButton($('#button-' + views[v]), 0);
 		$('#button-' + views[v]).removeClass('button-selected');
 	}
-	$('#button-'+view).addClass('button-selected');
-	if(infinitelistloadingsettings.view==view){
-		//invert sorting
-		infinitelistloadingsettings.descending=!infinitelistloadingsettings.descending;
-		if(infinitelistloadingsettings.descending){
-			rotateButton($('#button-'+view), 15);
+	$('#button-' + view).addClass('button-selected');
+	if (infinitelistloadingsettings.view == view) {
+		// invert sorting
+		infinitelistloadingsettings.descending = !infinitelistloadingsettings.descending;
+		if (infinitelistloadingsettings.descending) {
+			rotateButton($('#button-' + view), 15);
 		} else {
-			rotateButton($('#button-'+view), -15);
+			rotateButton($('#button-' + view), -15);
 		}
-		console.log("Changing sorting to descending=" +infinitelistloadingsettings.descending );		
+		console.log("Changing sorting to descending="
+				+ infinitelistloadingsettings.descending);
 	} else {
-		infinitelistloadingsettings.view=view;
-		infinitelistloadingsettings.descending=false;
-		rotateButton($('#button-'+view), -15);
+		infinitelistloadingsettings.view = view;
+		infinitelistloadingsettings.descending = false;
+		rotateButton($('#button-' + view), -15);
 		console.log("Changing view to " + view);
 	}
 	createInfiniteList();
 }
 
-function rotateButton(button, deg){
-	var scale ="";
-	if(deg!=0){
+function rotateButton(button, deg) {
+	var scale = "";
+	if (deg != 0) {
 		scale = "scale(1.25, 1.25)";
 	}
-	button.css('-moz-transform', scale + ' rotate('+deg+'deg)');
-	button.css('-webkit-transform', scale +' rotate('+deg+'deg)');
-	button.css('-o-transform', scale + ' rotate('+deg+'deg)');;
-	button.css('transform', scale + ' rotate('+deg+'deg)');
-	button.css('transform', scale + ' rotate('+deg+'deg)');
+	button.css('-moz-transform', scale + ' rotate(' + deg + 'deg)');
+	button.css('-webkit-transform', scale + ' rotate(' + deg + 'deg)');
+	button.css('-o-transform', scale + ' rotate(' + deg + 'deg)');
+	;
+	button.css('transform', scale + ' rotate(' + deg + 'deg)');
+	button.css('transform', scale + ' rotate(' + deg + 'deg)');
 }
 
 /**
@@ -58,7 +85,7 @@ function createInfiniteList() {
 	// add the scroll handler
 	$(window).bind("scroll resize", function(event) {
 		var postLoad = checkPostLoadInfiniteList();
-//		console.log("Ende: " + postLoad);
+		// console.log("Ende: " + postLoad);
 		if (postLoad) {
 			loadInfiniteListItems();
 		}
@@ -71,7 +98,7 @@ function createInfiniteList() {
 function loadInfiniteListItems() {
 	if (!INFINITELISTLOADINGMUTEX.locked) {
 		console.log("postloading items for infinite list");
-//		showLoading();
+		// showLoading();
 		$('#infinitecollectionlistscrollinfo').show();
 		INFINITELISTLOADINGMUTEX.locked = true;
 		db.view(design + "/" + infinitelistloadingsettings.view, {
@@ -80,18 +107,18 @@ function loadInfiniteListItems() {
 			skip : infinitelistloadingsettings.items
 					* infinitelistloadingsettings.loadCounter,
 			success : function(data) {
-				var list = Mark.up($("#template-infinitecollectionlist")
-						.html(), data);
+				var list = Mark.up($("#template-collectionlist").html(), data);
 				if (infinitelistloadingsettings.loadCounter == 0) {
-					$("#infinitecollectionlist").html(list);
+					$("#collectionlist").html(list);
 				} else {
-					$("#infinitecollectionlist").append(list);
+					$("#collectionlist").append(list);
 				}
 				infinitelistloadingsettings.loadCounter++;
-				//$(".fancybox").fancybox();
+				// $(".fancybox").fancybox();
 				INFINITELISTLOADINGMUTEX.locked = false;
-//				hideLoading();
+				// hideLoading();
 				$('#infinitecollectionlistscrollinfo').hide();
+				// $('#listcontainer').unblock();
 			},
 		});
 	}
@@ -112,7 +139,7 @@ function checkPostLoadInfiniteList() {
 	// NOTE: I am using the container rather than the list
 	// itself since the list has FLOATING elements, which
 	// might cause the UL to report an inacturate height.
-	var container = $("#infinitecollectionlistcontainer");
+	var container = $("#listcontainer");
 	var containerBottom = Math.floor(container.offset().top
 			+ container.height());
 
@@ -139,10 +166,7 @@ function checkPostLoadInfiniteList() {
 	}
 }
 
-Mark.pipes.replace = function (str, n, m) {
-    return str.replace(n, m);
-};
-
 $(document).ready(function() {
+	initInfiniteList();
 	handleListChange(views[0]);
 });

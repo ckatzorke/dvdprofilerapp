@@ -159,6 +159,18 @@ public class CollectionXmlStreamProcessor extends AbstractCollectionProcessor {
 											"<br>");
 									dvd.setOverview(overview);
 								}
+								if (CollectionProcessor.COLLECTION_ELEMENT_REVIEW
+										.equals(context.getCurrentElement())) {
+									try {
+										dvd.setReview(Integer
+												.parseInt(staxReader
+														.getAttributeValue(
+																null, "Film")));
+									} catch (NumberFormatException e) {
+										// logger.warning("Error parsing as int@"
+										// + staxReader.getLocation());
+									}
+								}
 								if (CollectionProcessor.COLLECTION_ELEMENT_MEDIA_TYPES
 										.equals(staxReader.getLocalName())) {
 									List<MediaType> mediatypes = new ArrayList<MediaType>();
@@ -214,19 +226,24 @@ public class CollectionXmlStreamProcessor extends AbstractCollectionProcessor {
 														.equals(staxReader
 																.getLocalName())) {
 											actor = new Actor();
-											for (int i = 0;i<staxReader.getAttributeCount();i++){
-												String attrName = staxReader.getAttributeLocalName(i);
-												String attrValue = staxReader.getAttributeValue(i);
+											for (int i = 0; i < staxReader
+													.getAttributeCount(); i++) {
+												String attrName = staxReader
+														.getAttributeLocalName(i);
+												String attrValue = staxReader
+														.getAttributeValue(i);
 												try {
 													Method method = actor
 															.getClass()
 															.getMethod(
 																	"set"
 																			+ attrName,
-																			String.class);
-													ReflectionUtils.invokeMethod(
-															method, actor,
-															attrValue);
+																	String.class);
+													ReflectionUtils
+															.invokeMethod(
+																	method,
+																	actor,
+																	attrValue);
 												} catch (Exception e) {
 													// nothing
 												}

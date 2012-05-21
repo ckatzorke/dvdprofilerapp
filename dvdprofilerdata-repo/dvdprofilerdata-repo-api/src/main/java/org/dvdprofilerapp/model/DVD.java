@@ -21,6 +21,8 @@ public class DVD {
 	private String productionYear;
 	private String rating;
 	private String ratingAge;
+	private int review;
+
 	private Actor[] actors;
 	
 	private DVD[] childProfiles;
@@ -175,6 +177,13 @@ public class DVD {
 
 	public void setActors(Actor[] actors) {
 		this.actors = actors;
+	}
+	public int getReview() {
+		return review;
+	}
+	
+	public void setReview(int review) {
+		this.review = review;
 	}
 
 	@Override

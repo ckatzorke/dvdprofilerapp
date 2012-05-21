@@ -24,6 +24,7 @@ public interface CollectionProcessor {
 	public static final String COLLECTION_ELEMENT_RATING = "Rating";
 	public static final String COLLECTION_ELEMENT_RATING_AGE = "RatingAge";
 	public static final String COLLECTION_ELEMENT_RELEASE_DATE = "Released";
+	public static final String COLLECTION_ELEMENT_REVIEW = "Review";
 
 	/** helper */
 	public static final String COLLECTION_ELEMENT_MEDIA_TYPE = "MediaType";

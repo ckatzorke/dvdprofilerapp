@@ -32,7 +32,7 @@
 		<property name="repo" ref="ektorpRepo" />
 		<property name="dvdprofilerDBDirectory"
 			value="C:/Users/Chris/Documents/DVD Profiler/Databases/Default" />
-		<property name="forceUpdate" value="true" />
+		<property name="forceUpdate" value="false" />
 	</bean>
 
 

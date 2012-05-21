@@ -12,11 +12,20 @@
 	<div style="float: left; width: 400px; height: 100%; overflow: auto; padding: 5px;">
 		<h1>{{title}}</h1>
 		<small>{{genres|join>&nbsp;&#124;&nbsp;}}</small><br>
-		<small>Country of origin: {{countryOfOrigin}}</small><br>
+		<small>Country of origin: {{if countryOfOrigin|notempty}}<img valign="absmiddle" src="images/flags/{{countryOfOrigin|downcase|replace> >_}}.png">&nbsp;{{/if}}{{countryOfOrigin}}</small><br>
 		<small>Purchased on {{purchaseDate}}</small>
 		<br>
 		<div class="detailsoverview">
 		{{overview}}
+		</div>
+		<h2>Cast</h2>
+		<div id="actors" class="castAndCrew">
+			{{actors|limit}}
+				{{.|castAndCrew>60}}<br>
+			{{/actors}}
+		</div>
+		<h2>Crew</h2>
+		<div id="crew">
 		</div>
 	</div>
 </div>
